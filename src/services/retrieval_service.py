@@ -65,3 +65,70 @@ def retrieve_relevant_chunks(
         results.append(result)
 
     return results
+
+
+
+def retrieve_from_chroma(
+    query: str,
+    collection,
+    model: SentenceTransformer,
+    top_k: int = 3,
+) -> list[dict]:
+    """Retrieve relevant medical chunks from persistent ChromaDB."""
+
+    if not isinstance(query, str) or not query.strip():
+        raise ValueError("query must not be empty")
+
+    if not isinstance(top_k, int) or isinstance(top_k, bool):
+        raise TypeError("top_k must be an integer")
+
+    if top_k <= 0:
+        raise ValueError("top_k must be positive")
+
+    total_chunks = collection.count()
+
+    if total_chunks == 0:
+        return []
+
+    # Embed only the user's question.
+    query_embedding = np.asarray(
+        generate_embeddings([query], model),
+        dtype=np.float32,
+    )
+
+    if query_embedding.ndim != 2 or query_embedding.shape[0] != 1:
+        raise ValueError("query embedding must contain exactly one vector")
+
+    if not np.isfinite(query_embedding).all():
+        raise ValueError("query embedding must contain only finite values")
+
+    # Search the vectors already stored in ChromaDB.
+    search_results = collection.query(
+        query_embeddings=query_embedding.tolist(),
+        n_results=min(top_k, total_chunks),
+        include=["documents", "metadatas", "distances"],
+    )
+
+    results = []
+
+    ids = search_results["ids"][0]
+    documents = search_results["documents"][0]
+    metadatas = search_results["metadatas"][0]
+    distances = search_results["distances"][0]
+
+    for chunk_id, text, metadata, distance in zip(
+        ids,
+        documents,
+        metadatas,
+        distances,
+    ):
+        result = {
+            "id": chunk_id,
+            **(metadata or {}),
+            "text": text,
+            "similarity_score": float(1.0 - distance),
+        }
+
+        results.append(result)
+
+    return results

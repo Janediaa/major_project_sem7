@@ -8,3 +8,33 @@ wheels/
 
 # Virtual environments
 .venv
+
+#keys
+.env
+.env.*
+!.env.example
+
+venv/
+venv313/
+__pycache__/
+*.pyc
+
+node_modules/
+dist/
+
+.pytest_cache/
+.vscode/
+
+data/chroma_db/
+data/chroma_test/
+
+
+
+
+# Python environment
+.venv/
+venv/
+venv313/
+
+# Logs
+*.log
