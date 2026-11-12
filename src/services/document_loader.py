@@ -1,15 +1,76 @@
+from html.parser import HTMLParser
 import json
 from pathlib import Path
 
-from bs4 import BeautifulSoup
+try:
+    from bs4 import BeautifulSoup
+except ImportError:
+    BeautifulSoup = None
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DOCUMENTS_DIR = PROJECT_ROOT / "data" / "medical_documents"
 SOURCES_PATH = DOCUMENTS_DIR / "sources.json"
 
+
+class _StdlibHTMLTextExtractor(HTMLParser):
+    """Lightweight stdlib HTML text extractor used when bs4 is unavailable."""
+
+    SKIP_TAGS = {"script", "style", "noscript", "nav", "footer", "header"}
+
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self._skip_depth = 0
+        self._main_depth = 0
+        self._has_main_or_article = False
+        self._all_parts: list[str] = []
+        self._main_parts: list[str] = []
+
+    def handle_starttag(self, tag, attrs):
+        tag_lower = tag.lower()
+        if tag_lower in self.SKIP_TAGS:
+            self._skip_depth += 1
+            return
+        if tag_lower in {"main", "article"}:
+            self._main_depth += 1
+            self._has_main_or_article = True
+
+    def handle_endtag(self, tag):
+        tag_lower = tag.lower()
+        if tag_lower in self.SKIP_TAGS and self._skip_depth > 0:
+            self._skip_depth -= 1
+            return
+        if tag_lower in {"main", "article"} and self._main_depth > 0:
+            self._main_depth -= 1
+        if tag_lower in {"p", "div", "li", "h1", "h2", "h3", "h4", "br", "tr"}:
+            self._all_parts.append("\n")
+            if self._main_depth > 0:
+                self._main_parts.append("\n")
+
+    def handle_data(self, data):
+        if self._skip_depth > 0 or not data.strip():
+            return
+        self._all_parts.append(data)
+        if self._main_depth > 0:
+            self._main_parts.append(data)
+
+    def get_text(self) -> str:
+        raw = "".join(self._main_parts if self._has_main_or_article else self._all_parts)
+        return "\n".join(
+            " ".join(line.split())
+            for line in raw.splitlines()
+            if line.strip()
+        )
+
+
 def extract_html_text(html: str) -> str:
     """Extract readable text from an HTML document."""
+    if BeautifulSoup is None:
+        parser = _StdlibHTMLTextExtractor()
+        parser.feed(html)
+        parser.close()
+        return parser.get_text()
+
     soup = BeautifulSoup(html, "html.parser")
 
     for element in soup.select(
@@ -31,7 +92,6 @@ def extract_html_text(html: str) -> str:
     ]
 
     return "\n".join(lines)
-
 
 
 def load_source_metadata() -> list[dict]:
@@ -94,7 +154,6 @@ def discover_documents() -> list[Path]:
     )
 
 
-
 def load_documents_metadata() -> list[dict]:
     """Match discovered files with metadata, generating safe defaults if absent."""
     metadata_entries = load_source_metadata()
@@ -133,7 +192,6 @@ def load_documents_metadata() -> list[dict]:
         })
 
     return matched_documents
-
 
 
 def extract_txt_text(path: Path) -> str:
@@ -177,4 +235,3 @@ def load_all_documents() -> list[dict]:
         })
 
     return loaded_documents
-
