@@ -1,31 +1,53 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, BookOpen, Activity, Stethoscope } from 'lucide-react';
+import { ArrowRight, BookOpen, Activity, Stethoscope, CalendarCheck2 } from 'lucide-react';
 import AgentMap from '../components/dashboard/AgentMap';
 import StatusPill from '../components/common/StatusPill';
 import SampleBadge from '../components/common/SampleBadge';
 import { AGENT_MODULES, MODULES } from '../config/modules';
 import { ACTIVITY, RAG_TOPICS } from '../data/sampleData';
+import { getAppointmentStats, getHealthStatus } from '../services/appointmentService';
 
 export default function Dashboard() {
+  const [stats, setStats] = useState(null);
+  const [health, setHealth] = useState(null);
+
+  useEffect(() => {
+    let active = true;
+    Promise.allSettled([getAppointmentStats(), getHealthStatus()]).then(
+      ([statsRes, healthRes]) => {
+        if (!active) return;
+        if (statsRes.status === 'fulfilled') setStats(statsRes.value);
+        if (healthRes.status === 'fulfilled') setHealth(healthRes.value);
+      }
+    );
+    return () => {
+      active = false;
+    };
+  }, []);
+
   return (
     <div className="page dashboard">
       <section className="hero">
         <div className="hero__copy">
-          <h1>Find care, check symptoms and understand coverage in one place.</h1>
+          <h1>Find care, book appointments and understand medical guidance in one place.</h1>
           <p>
             Healthcare Navigator brings specialised AI agents together so you do not have to jump
-            between disconnected services. Today you can ask the Medical Knowledge Assistant; the
-            other agents are being built.
+            between disconnected services. Doctor &amp; Hospital search, Appointments, and the
+            Medical Knowledge Assistant are live; Triage and Insurance are next.
           </p>
           <div className="hero__cta">
-            <Link to="/medical-knowledge" className="btn btn--primary">
+            <Link to="/appointments" className="btn btn--primary">
+              <CalendarCheck2 size={18} /> Book an appointment
+            </Link>
+            <Link to="/doctor-hospital" className="btn btn--ghost">
+              <Stethoscope size={18} /> Find a doctor
+            </Link>
+            <Link to="/medical-knowledge" className="btn btn--ghost">
               <BookOpen size={18} /> Ask a medical question
             </Link>
             <Link to="/triage" className="btn btn--ghost">
               <Activity size={18} /> Check symptoms
-            </Link>
-            <Link to="/doctor-hospital" className="btn btn--ghost">
-              <Stethoscope size={18} /> Find a doctor
             </Link>
           </div>
         </div>
@@ -33,7 +55,6 @@ export default function Dashboard() {
       </section>
 
       <section aria-labelledby="modules-h" className="section">
-        
         <div className="module-grid">
           {AGENT_MODULES.map((m) => {
             const Icon = m.icon;
@@ -54,10 +75,10 @@ export default function Dashboard() {
 
       <section className="rag-panel">
         <div className="rag-panel__main">
-          <h2>Medical Knowledge Assistant</h2>
+          <h2>Platform &amp; Knowledge Overview</h2>
           <p>
-            Ask a health question and get an answer grounded in World Health Organization documents,
-            with the sources listed underneath so you can read further.
+            Ask health questions grounded in World Health Organization documents, search verified
+            doctors across Indian cities, and book OPD slots backed by the merged Medscheduler dataset.
           </p>
           <div className="chip-row">
             {RAG_TOPICS.map((t) => (
@@ -69,15 +90,18 @@ export default function Dashboard() {
           </Link>
         </div>
         <dl className="rag-panel__stats">
-          <div><dt>WHO documents</dt><dd>10</dd></div>
-          <div><dt>Indexed passages</dt><dd>161</dd></div>
+          <div><dt>Doctors indexed</dt><dd>{stats ? stats.doctors : 484}</dd></div>
+          <div><dt>OPD schedules</dt><dd>{stats ? stats.schedule_rows : 2224}</dd></div>
           <div>
-            <dt>Live status</dt>
-            <dd className="rag-panel__status">Not checked</dd>
+            <dt>RAG status</dt>
+            <dd className="rag-panel__status">
+              {health ? (health.rag_initialized ? `Live (${health.total_chunks} chunks)` : 'Degraded') : 'Offline'}
+            </dd>
           </div>
         </dl>
         <p className="rag-panel__note">
-          Document counts come from the project notes. Live status needs the RAG API health check.
+          Merged dataset: {stats ? stats.merged_historical_records : 2904} historical outpatient records ·{' '}
+          {stats ? stats.upcoming_bookings : 0} active patient bookings.
         </p>
       </section>
 

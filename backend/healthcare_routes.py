@@ -1,16 +1,15 @@
-
-from fastapi import APIRouter, HTTPException, Query
+from fastapi import APIRouter, HTTPException
 from backend.database import get_db_connection
 
 router = APIRouter(prefix="/api", tags=["Doctors & Hospitals"])
-
 
 
 @router.get("/doctors")
 def get_doctors(
     city: str | None = None,
     specialization: str | None = None,
-    search: str | None = None
+    search: str | None = None,
+    hospital_id: int | None = None,
 ):
     conn = get_db_connection()
 
@@ -18,12 +17,14 @@ def get_doctors(
         query = """
             SELECT
                 d.doctor_id,
+                d.composite_doctor_id,
                 d.doctor_name,
                 d.doctor_type,
                 d.experience_years,
                 d.location,
                 d.fees,
                 d.city,
+                d.hospital_id,
                 h.hospital_name
             FROM doctors d
             LEFT JOIN hospitals h
@@ -41,6 +42,10 @@ def get_doctors(
             query += " AND LOWER(d.doctor_type) LIKE LOWER(?)"
             params.append(f"%{specialization}%")
 
+        if hospital_id is not None:
+            query += " AND d.hospital_id = ?"
+            params.append(hospital_id)
+
         if search:
             query += """
                 AND (
@@ -57,7 +62,7 @@ def get_doctors(
 
         return {
             "total": len(rows),
-            "doctors": [dict(row) for row in rows]
+            "doctors": [dict(row) for row in rows],
         }
 
     finally:
@@ -66,10 +71,11 @@ def get_doctors(
 
 # ---------------- HOSPITAL APIs ----------------
 
+
 @router.get("/hospitals")
 def get_hospitals(
     city: str | None = None,
-    search: str | None = None
+    search: str | None = None,
 ):
     conn = get_db_connection()
 
@@ -105,7 +111,7 @@ def get_hospitals(
 
         return {
             "total": len(rows),
-            "hospitals": [dict(row) for row in rows]
+            "hospitals": [dict(row) for row in rows],
         }
 
     finally:
@@ -114,6 +120,7 @@ def get_hospitals(
 
 # -------- DOCTORS BELONGING TO A HOSPITAL --------
 
+
 @router.get("/hospitals/{hospital_id}/doctors")
 def get_hospital_doctors(hospital_id: int):
     conn = get_db_connection()
@@ -121,30 +128,30 @@ def get_hospital_doctors(hospital_id: int):
     try:
         hospital = conn.execute(
             "SELECT * FROM hospitals WHERE hospital_id = ?",
-            (hospital_id,)
+            (hospital_id,),
         ).fetchone()
 
         if hospital is None:
             raise HTTPException(
                 status_code=404,
-                detail="Hospital not found"
+                detail="Hospital not found",
             )
 
         rows = conn.execute(
             """
-            SELECT doctor_id, doctor_name, doctor_type,
-                   experience_years, fees, city, location
+            SELECT doctor_id, composite_doctor_id, doctor_name, doctor_type,
+                   experience_years, fees, city, location, hospital_id
             FROM doctors
             WHERE hospital_id = ?
             ORDER BY doctor_name
             """,
-            (hospital_id,)
+            (hospital_id,),
         ).fetchall()
 
         return {
             "hospital": dict(hospital),
             "total_doctors": len(rows),
-            "doctors": [dict(row) for row in rows]
+            "doctors": [dict(row) for row in rows],
         }
 
     finally:

@@ -1,0 +1,24 @@
+{
+  "generated_at_utc": "2026-11-12T07:57:00.577871+00:00",
+  "primary_doctors_dataset": {
+    "path": "data/processed/healthcare_professionals_clean.csv",
+    "doctor_count": 484,
+    "hospital_count": 244,
+    "city_count": 10
+  },
+  "merged_appointment_dataset": {
+    "name": "Medscheduler Outpatient Appointment Scheduling Dataset",
+    "source_repo": "https://github.com/TwiTech/Personalized-Appointment-Reminders",
+    "generator_project": "https://github.com/carogaltier/medscheduler",
+    "raw_counts": {
+      "slots_csv": 104360,
+      "appointments_csv": 111488,
+      "patients_csv": 36697
+    }
+  },
+  "merged_outputs": {
+    "doctor_schedules_merged.csv": 2224,
+    "doctor_slot_baselines.csv": 8474,
+    "appointments_merged.csv": 2904
+  }
+}

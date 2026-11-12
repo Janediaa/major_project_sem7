@@ -8,10 +8,10 @@ import {
 } from 'lucide-react';
 
 // Single source of truth for the sidebar, topbar title, and dashboard cards.
-// status: 'ready'   = backend exists, frontend not wired to it yet
-//         'planned' = backend not built yet
+// status: 'ready'   = backend and frontend connected
+//         'planned' = backend in development
 export const STATUS = {
-  ready: { label: 'Backend built, API not connected', short: 'Ready to connect' },
+  ready: { label: 'Connected & working', short: 'Live' },
   planned: { label: 'Backend in development', short: 'Planned' },
 };
 
@@ -29,7 +29,7 @@ export const MODULES = [
     path: '/doctor-hospital',
     icon: Stethoscope,
     keywords: ['doctor', 'hospital', 'specialist', 'clinic'],
-    status: 'planned',
+    status: 'ready',
     agents: ['Doctor Agent', 'Hospital Agent'],
     summary: 'Search doctors and hospitals together by specialty and location.',
   },
@@ -59,7 +59,7 @@ export const MODULES = [
     path: '/appointments',
     icon: CalendarCheck2,
     keywords: ['book', 'schedule', 'visit', 'booking'],
-    status: 'planned',
+    status: 'ready',
     agents: ['Appointment Agent'],
     summary: 'Pick a doctor, a day and a time, and keep track of your visits.',
   },

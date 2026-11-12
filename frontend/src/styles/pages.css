@@ -343,3 +343,66 @@
     background-position: -200% 0;
   }
 }
+
+/* Appointments live booking & schedule additions */
+.opd-banner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  padding: 11px 14px;
+  border-radius: var(--r-md);
+  background: var(--teal-50);
+  color: var(--navy-800);
+  font-size: 0.88rem;
+}
+.opd-banner span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.date-chip:disabled {
+  opacity: 0.45;
+  background: var(--wash);
+  cursor: not-allowed;
+}
+.history-item {
+  display: grid !important;
+  gap: 12px;
+}
+.history-item__main {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.reschedule-box {
+  padding: 14px;
+  border-radius: var(--r-md);
+  background: var(--wash);
+  display: grid;
+  gap: 12px;
+}
+.appt-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  background: var(--wash);
+  color: var(--ink-soft);
+}
+.appt-badge--scheduled {
+  background: var(--teal-100);
+  color: var(--teal-700);
+}
+.appt-badge--attended {
+  background: #e6f6ec;
+  color: #166534;
+}
+.appt-badge--cancelled,
+.appt-badge--did-not-attend {
+  background: var(--amber-bg);
+  color: var(--amber);
+}

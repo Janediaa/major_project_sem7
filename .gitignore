@@ -38,3 +38,6 @@ venv313/
 
 # Logs
 *.log
+
+# Raw downloaded external datasets
+data/raw/

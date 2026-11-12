@@ -327,11 +327,20 @@ export default function DoctorHospital() {
 
                 <button
                   className="btn btn--primary btn--block"
-                  disabled
-                  title="Appointment booking will be connected separately"
+                  onClick={() =>
+                    navigate('/appointments', {
+                      state: {
+                        doctorId: d.doctor_id,
+                        doctorName: d.doctor_name,
+                        hospitalId: d.hospital_id,
+                        hospitalName: d.hospital_name,
+                        city: d.city,
+                      },
+                    })
+                  }
                 >
                   <CalendarPlus size={16} />
-                  Appointment booking coming soon
+                  Book appointment
                 </button>
 
               </article>
@@ -387,14 +396,14 @@ export default function DoctorHospital() {
                     navigate('/appointments', {
                       state: {
                         hospitalId: h.hospital_id,
-                        hospitalName: h.hospital_name
+                        hospitalName: h.hospital_name,
+                        city: h.city,
                       }
                     })
                   }
-                  title="Appointment booking will be connected separately"
                 >
                   <BriefcaseMedical size={16} />
-                  View appointment options
+                  Book at this hospital
                 </button>
 
               </article>
