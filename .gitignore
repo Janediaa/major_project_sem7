@@ -41,3 +41,6 @@ venv313/
 
 # Raw downloaded external datasets
 data/raw/
+
+# Vercel local link metadata
+.vercel/
