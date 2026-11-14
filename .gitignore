@@ -44,3 +44,14 @@ data/raw/
 
 # Vercel local link metadata
 .vercel/
+
+
+# Insurance module local data
+data/insurance_chroma_db/
+data/insurance_documents/
+data/policy_finder.db
+
+# SQLite databases
+*.db
+*.sqlite
+*.sqlite3

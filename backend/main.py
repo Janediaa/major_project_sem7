@@ -6,6 +6,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from backend.appointment_routes import router as appointment_router
 from backend.healthcare_routes import router as healthcare_router
 from backend.schemas import RAGAnswerResponse, RAGQuestionRequest
+from backend.insurance_routes import router as insurance_router
+from backend.policy_finder_routes import router as policy_finder_router
+
 
 
 @asynccontextmanager
@@ -40,7 +43,8 @@ app = FastAPI(
 
 app.include_router(healthcare_router)
 app.include_router(appointment_router)
-
+app.include_router(insurance_router)
+app.include_router(policy_finder_router)
 
 app.add_middleware(
     CORSMiddleware,
