@@ -8,7 +8,6 @@ import {
   Clock,
   IndianRupee,
   RefreshCw,
-  ShieldCheck,
   Stethoscope,
   User,
   X,
@@ -465,27 +464,14 @@ export default function Appointments() {
           gap: '0.75rem',
           padding: '0.85rem 1.25rem',
           borderRadius: 'var(--r-md)',
-          background:
-            role === ROLES.DOCTOR
-              ? '#ecfdf5'
-              : role === ROLES.ADMIN
-              ? '#fef3c7'
-              : '#eef2ff',
-          border: `1px solid ${
-            role === ROLES.DOCTOR
-              ? '#a7f3d0'
-              : role === ROLES.ADMIN
-              ? '#fde68a'
-              : '#c7d2fe'
-          }`,
+          background: role === ROLES.DOCTOR ? '#ecfdf5' : '#eef2ff',
+          border: `1px solid ${role === ROLES.DOCTOR ? '#a7f3d0' : '#c7d2fe'}`,
           marginBottom: '1.25rem',
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
           {role === ROLES.DOCTOR ? (
             <Stethoscope size={18} style={{ color: '#047857' }} />
-          ) : role === ROLES.ADMIN ? (
-            <ShieldCheck size={18} style={{ color: '#b45309' }} />
           ) : (
             <User size={18} style={{ color: '#4338ca' }} />
           )}
@@ -495,7 +481,6 @@ export default function Appointments() {
             )
             {role === ROLES.PATIENT && ' — Patient profile details are auto-filled for faster booking'}
             {role === ROLES.DOCTOR && ' — Reviewing outpatient consultations & OPD slots'}
-            {role === ROLES.ADMIN && ' — Full administrative oversight across all doctor bookings'}
           </span>
         </div>
         <span className={`role-badge role-badge--${role || 'patient'}`}>
