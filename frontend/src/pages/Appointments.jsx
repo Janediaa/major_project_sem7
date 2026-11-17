@@ -336,28 +336,25 @@ export default function Appointments() {
     setFormError('');
     setSubmitting(true);
     try {
-      const parsedAge = patientAge.trim() ? Number(patientAge.trim()) : null;
+      const parsedAge = patientAge.trim() ? Number(patientAge.trim()) : 28;
       const res = await bookAppointment({
-        doctor_id: Number(doctorId),
+        doctor_id: isNaN(Number(doctorId)) ? doctorId : Number(doctorId),
+        doctor_name: selectedDoctor?.doctor_name,
+        doctor_type: selectedDoctor?.doctor_type || selectedDoctor?.specialization,
+        hospital_id: selectedDoctor?.hospital_id,
+        hospital_name: selectedDoctor?.hospital_name,
+        city: selectedDoctor?.city,
         appointment_date: selectedDate,
         appointment_time: slot,
         patient_name: patientName.trim(),
-        patient_phone: patientPhone.trim() || null,
+        patient_email: user?.email || 'patient@healthnavigator.ai',
+        patient_phone: patientPhone.trim() || '+91 98765 43210',
         patient_age: parsedAge,
-        patient_sex: patientSex || null,
-        reason: reason.trim() || null,
+        patient_sex: patientSex || 'Female',
+        reason: reason.trim() || 'General Medical Consultation',
       });
 
       const booked = res.appointment;
-      try {
-        const stored = JSON.parse(localStorage.getItem('hn_user_bookings') || '[]');
-        const updatedBookings = [booked, ...stored.filter((b) => b.booking_reference !== booked.booking_reference)];
-        localStorage.setItem('hn_user_bookings', JSON.stringify(updatedBookings));
-        window.dispatchEvent(new CustomEvent('hn_appointments_updated', { detail: booked }));
-      } catch (storageErr) {
-        console.warn('Failed to cache user booking:', storageErr);
-      }
-
       setToast(
         `Confirmed (${booked.booking_reference}): ${booked.doctor_name} on ${booked.appointment_date} at ${booked.display_time}.`
       );
@@ -379,16 +376,6 @@ export default function Appointments() {
   const handleCancel = async (appointmentId) => {
     try {
       await cancelAppointment(appointmentId);
-      try {
-        const stored = JSON.parse(localStorage.getItem('hn_user_bookings') || '[]');
-        const updatedBookings = stored.map((b) =>
-          b.appointment_id === appointmentId ? { ...b, status: 'cancelled' } : b
-        );
-        localStorage.setItem('hn_user_bookings', JSON.stringify(updatedBookings));
-        window.dispatchEvent(new CustomEvent('hn_appointments_updated', { detail: { appointmentId, status: 'cancelled' } }));
-      } catch (storageErr) {
-        console.warn('Failed to sync cancellation:', storageErr);
-      }
       setToast('Appointment cancelled and slot released.');
       await Promise.all([
         refreshAppointmentsList(),
@@ -838,20 +825,25 @@ export default function Appointments() {
                       {formatTitle(a.city)} · Patient: <strong>{a.patient_name}</strong> · Ref:{' '}
                       <code>{a.booking_reference}</code>
                     </small>
+                    {a.rejectionReason && (
+                      <small style={{ display: 'block', color: '#b91c1c', marginTop: '0.2rem', fontWeight: 500 }}>
+                        Note: {a.rejectionReason}
+                      </small>
+                    )}
                   </div>
                   <div className="history__when">
                     <span>{a.appointment_date}</span>
                     <small>{a.display_time || a.appointment_time}</small>
                   </div>
-                  <span className={`appt-badge appt-badge--${a.status.replace(/\s+/g, '-')}`}>
+                  <span className={`appt-badge appt-badge--${(a.status || 'scheduled').replace(/\s+/g, '-')}`}>
                     {a.status}
                   </span>
-                  {tab === 'upcoming' && a.status === 'scheduled' && (
+                  {tab === 'upcoming' && (a.status === 'scheduled' || a.status === 'confirmed' || a.status === 'pending') && (
                     <div className="row">
                       <button
                         className="btn btn--ghost btn--sm"
                         onClick={() =>
-                          rescheduleTarget === a.appointment_id
+                          rescheduleTarget === (a.appointment_id || a.booking_reference)
                             ? setRescheduleTarget(null)
                             : startReschedule(a)
                         }
@@ -860,7 +852,7 @@ export default function Appointments() {
                       </button>
                       <button
                         className="btn btn--ghost btn--sm"
-                        onClick={() => handleCancel(a.appointment_id)}
+                        onClick={() => handleCancel(a.appointment_id || a.booking_reference)}
                       >
                         Cancel
                       </button>
