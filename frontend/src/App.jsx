@@ -8,12 +8,14 @@ import Insurance from './pages/Insurance.jsx';
 import Triage from './pages/Triage.jsx';
 import Appointments from './pages/Appointments.jsx';
 import MedicalKnowledge from './pages/MedicalKnowledge.jsx';
+import DoctorApp from './doctor/DoctorApp.jsx';
 
 export default function App() {
   return (
     <Routes>
       <Route path="/login" element={<Auth />} />
       <Route path="/register" element={<Auth />} />
+      <Route path="/doctor/*" element={<DoctorApp />} />
       <Route
         element={
           <ProtectedRoute>
