@@ -597,6 +597,16 @@ export default function Appointments() {
             <div className="date-strip">
               {availability.map((d) => {
                 const closed = !d.opd_open || d.available_count === 0;
+                const weekdayShort =
+                  d.weekday_short ||
+                  d.day_name?.slice(0, 3) ||
+                  (d.date ? new Date(d.date + 'T00:00:00').toLocaleDateString('en-US', { weekday: 'short' }) : 'Day');
+                const dayNum =
+                  d.day_num != null
+                    ? d.day_num
+                    : d.date
+                    ? new Date(d.date + 'T00:00:00').getDate()
+                    : '';
                 return (
                   <button
                     key={d.date}
@@ -609,8 +619,8 @@ export default function Appointments() {
                     }}
                     aria-pressed={d.date === selectedDate}
                   >
-                    <small>{d.weekday_short}</small>
-                    <strong>{d.day_num}</strong>
+                    <small>{weekdayShort}</small>
+                    <strong>{dayNum}</strong>
                     <small>{d.opd_open ? `${d.available_count} free` : 'Closed'}</small>
                   </button>
                 );
@@ -622,12 +632,12 @@ export default function Appointments() {
             <legend className="label">
               Time{' '}
               <span className="muted">
-                · {slotsData ? `${slotsData.available_count} of ${slotsData.total_count} slots open` : 'Select a date'}
+                · {slotsData ? `${slotsData.available_count} of ${slotsData.total_count || slotsData.total_slots || slotsData.slots?.length || 10} slots open` : 'Select a date'}
               </span>
             </legend>
             {loadingSlots ? (
               <p className="muted">Loading slots…</p>
-            ) : !slotsData || !slotsData.opd_open ? (
+            ) : !slotsData || (!slotsData.opd_open && (!slotsData.slots || slotsData.slots.length === 0)) ? (
               <p className="muted">OPD is closed on this day. Please pick an open weekday.</p>
             ) : (
               <div className="slot-grid">
