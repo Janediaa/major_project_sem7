@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from 'react-router-dom';
-import { LogOut, X } from 'lucide-react';
+import { LogOut, Stethoscope, X } from 'lucide-react';
 import { MODULES, STATUS } from '../../config/modules';
 import { useAuth } from '../../context/AuthContext';
 import Logo from './Logo';
@@ -45,6 +45,17 @@ export default function Sidebar({ open, onClose }) {
             )}
           </NavLink>
         ))}
+
+        {role === 'doctor' && (
+          <NavLink
+            to="/doctor"
+            className={({ isActive }) => `nav-link ${isActive ? 'nav-link--active' : ''}`}
+            style={{ marginTop: '0.5rem', background: '#ecfdf5', color: '#047857', fontWeight: 600 }}
+          >
+            <Stethoscope size={19} aria-hidden="true" />
+            <span>Doctor Portal</span>
+          </NavLink>
+        )}
       </nav>
 
       <div className="sidebar__user">
