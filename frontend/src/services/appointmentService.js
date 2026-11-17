@@ -88,3 +88,11 @@ export async function rescheduleAppointment(appointmentId, payload) {
     body: JSON.stringify(payload),
   });
 }
+
+export async function updateAppointmentStatus(appointmentId, status, reason = '') {
+  return requestJson(`${API_BASE_URL}/api/appointments/${appointmentId}/status`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ status, reason }),
+  });
+}
