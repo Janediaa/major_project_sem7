@@ -1,16 +1,22 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowRight, BookOpen, Activity, Stethoscope, CalendarCheck2 } from 'lucide-react';
+import { Link, Navigate } from 'react-router-dom';
+import { ArrowRight, BookOpen, Activity, Stethoscope, CalendarCheck2, Heart, PhoneCall, Shield } from 'lucide-react';
 import AgentMap from '../components/dashboard/AgentMap';
 import StatusPill from '../components/common/StatusPill';
 import SampleBadge from '../components/common/SampleBadge';
 import { AGENT_MODULES, MODULES } from '../config/modules';
 import { ACTIVITY, RAG_TOPICS } from '../data/sampleData';
 import { getAppointmentStats, getHealthStatus } from '../services/appointmentService';
+import { ROLES, useAuth } from '../context/AuthContext';
 
 export default function Dashboard() {
+  const { role, user } = useAuth();
   const [stats, setStats] = useState(null);
   const [health, setHealth] = useState(null);
+
+  if (role === ROLES.DOCTOR) {
+    return <Navigate to="/doctor" replace />;
+  }
 
   useEffect(() => {
     let active = true;
@@ -28,6 +34,52 @@ export default function Dashboard() {
 
   return (
     <div className="page dashboard">
+      {/* Patient Portal Welcome Banner */}
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
+          gap: '0.75rem',
+          padding: '0.85rem 1.25rem',
+          borderRadius: 'var(--r-md)',
+          background: 'linear-gradient(135deg, #eef2ff 0%, #f0fdfa 100%)',
+          border: '1px solid #c7d2fe',
+          marginBottom: '1.25rem',
+        }}
+      >
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+          <Heart size={20} style={{ color: 'var(--teal-600)' }} />
+          <span style={{ fontSize: '0.9rem', color: 'var(--navy-900)' }}>
+            Welcome back, <strong>{user?.name || 'Alex Sharma'}</strong> · Signed in as{' '}
+            <span style={{ textTransform: 'capitalize', fontWeight: 600 }}>{role || 'Patient'}</span>
+            {' '}— Your personal healthcare, appointments, and medical knowledge dashboard
+          </span>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+          <span className="role-badge role-badge--patient">
+            Patient Portal
+          </span>
+          <span
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.35rem',
+              fontSize: '0.75rem',
+              color: '#dc2626',
+              background: '#fef2f2',
+              padding: '0.25rem 0.6rem',
+              borderRadius: '999px',
+              border: '1px solid #fecaca',
+              fontWeight: 500,
+            }}
+          >
+            <PhoneCall size={12} /> Emergency: 102 / 108
+          </span>
+        </div>
+      </div>
+
       <section className="hero">
         <div className="hero__copy">
           <h1>Find care, book appointments and understand medical guidance in one place.</h1>
