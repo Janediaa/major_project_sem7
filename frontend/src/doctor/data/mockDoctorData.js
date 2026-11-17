@@ -37,8 +37,8 @@ export const DEMO_DOCTOR = {
   location: 'Delhi',
   fee: 800,
   phone: '+91 90000 00000',
-  email: 'ananya.rao@demo.example',
-  bio: 'Demo profile. Focuses on asthma, COPD and long-term cough, with an interest in patient education.',
+  email: 'doctor@healthnavigator.ai',
+  bio: 'Senior Pulmonologist and Clinical Lead focusing on asthma, COPD, and outpatient respiratory care.',
 };
 
 // [dayOffset, time, patient, age, gender, reason, status, notes, requested]

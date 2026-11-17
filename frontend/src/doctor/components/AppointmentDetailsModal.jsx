@@ -36,7 +36,7 @@ export default function AppointmentDetailsModal({ appointment: a, onClose, onAcc
         <li><CalendarDays size={16} aria-hidden="true" /> {formatDate(a.date, { weekday: 'long', day: 'numeric', month: 'long' })}</li>
         <li><Clock size={16} aria-hidden="true" /> {a.time}</li>
         <li><Stethoscope size={16} aria-hidden="true" /> {a.reason}</li>
-        <li><Phone size={16} aria-hidden="true" /> {a.phone} <span className="muted">(demo number)</span></li>
+        <li><Phone size={16} aria-hidden="true" /> {a.phone}</li>
       </ul>
 
       <div className="dr-detail__block">

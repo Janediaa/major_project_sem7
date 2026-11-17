@@ -51,7 +51,7 @@ export default function DoctorTopbar({ onMenu }) {
           <Bell size={20} />
           {pending > 0 && <span className="dr-bell__dot">{pending}</span>}
         </Link>
-        <Link to="/doctor/profile" className="profile" title="Demo profile">
+        <Link to="/doctor/profile" className="profile" title="Doctor Profile">
           <span className="profile__avatar" aria-hidden="true">{profile.name.replace('Dr. ', '').split(' ').map((p) => p[0]).join('').slice(0, 2)}</span>
           <span className="profile__text">
             <strong>{profile.name}</strong>
