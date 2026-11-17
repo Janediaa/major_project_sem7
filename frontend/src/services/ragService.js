@@ -1,5 +1,6 @@
 const API_BASE_URL =
-  import.meta.env.VITE_API_BASE_URL ?? (import.meta.env.DEV ? 'http://127.0.0.1:8000' : '');
+  import.meta.env.VITE_API_BASE_URL ||
+  (import.meta.env.DEV ? 'http://127.0.0.1:8000' : 'https://healthcare-navigator-api-phi.vercel.app');
 
 export async function askMedicalQuestion(question) {
   const response = await fetch(`${API_BASE_URL}/api/rag/ask`, {
@@ -9,6 +10,14 @@ export async function askMedicalQuestion(question) {
     },
     body: JSON.stringify({ question }),
   });
+
+  const contentType = response.headers.get('content-type') || '';
+  if (!contentType.includes('application/json')) {
+    const text = await response.text();
+    if (text.trim().startsWith('<')) {
+      throw new Error('Server returned HTML response instead of JSON. Check backend API URL.');
+    }
+  }
 
   if (!response.ok) {
     const errorData = await response.json().catch(() => ({}));

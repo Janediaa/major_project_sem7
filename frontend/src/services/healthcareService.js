@@ -1,5 +1,6 @@
 const API_BASE_URL =
-  import.meta.env.VITE_API_BASE_URL ?? (import.meta.env.DEV ? 'http://127.0.0.1:8000' : '');
+  import.meta.env.VITE_API_BASE_URL ||
+  (import.meta.env.DEV ? 'http://127.0.0.1:8000' : 'https://healthcare-navigator-api-phi.vercel.app');
 
 // Cache previously fetched data
 let doctorsCache = null;
@@ -7,6 +8,19 @@ let hospitalsCache = null;
 
 async function fetchData(url) {
   const response = await fetch(url);
+  const contentType = response.headers.get('content-type') || '';
+
+  if (!contentType.includes('application/json')) {
+    const text = await response.text();
+    if (text.trim().startsWith('<')) {
+      throw new Error('Server returned HTML response instead of JSON. Check backend API URL.');
+    }
+    try {
+      return JSON.parse(text);
+    } catch {
+      throw new Error('Invalid JSON received from server.');
+    }
+  }
 
   if (!response.ok) {
     throw new Error('Unable to fetch healthcare data.');
