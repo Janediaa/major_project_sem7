@@ -62,10 +62,48 @@
 .popover__head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
 .popover li { padding: 10px 0; border-top: 1px solid var(--line); font-size: 0.88rem; color: var(--ink-soft); }
 
-.profile { display: flex; align-items: center; gap: 10px; padding: 4px 6px 4px 4px; border-radius: 999px; }
-.profile__avatar { width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; background: var(--teal-100); color: var(--teal-700); font-weight: 600; }
-.profile__text { display: grid; line-height: 1.2; }
-.profile__text small { color: var(--ink-faint); }
+.profile { display: flex; align-items: center; gap: 10px; padding: 4px 10px 4px 6px; border-radius: 999px; border: 1px solid transparent; background: transparent; cursor: pointer; transition: all 0.15s ease; font-family: inherit; }
+.profile:hover { background: var(--wash); border-color: var(--line); }
+.profile__avatar { width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; background: var(--teal-100); color: var(--teal-700); font-weight: 700; font-size: 0.85rem; flex: none; }
+.profile__avatar--patient { background: #eef2ff; color: #4338ca; }
+.profile__avatar--doctor { background: #ecfdf5; color: #047857; }
+.profile__avatar--admin { background: #fef3c7; color: #b45309; }
+
+.profile__text { display: grid; text-align: left; line-height: 1.2; }
+.profile__text strong { font-size: 0.88rem; color: var(--navy-900); }
+.profile__text small { color: var(--ink-faint); font-size: 0.72rem; display: flex; align-items: center; gap: 4px; }
+
+.role-badge { display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 999px; font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
+.role-badge--patient { background: #eef2ff; color: #4338ca; border: 1px solid #c7d2fe; }
+.role-badge--doctor { background: #ecfdf5; color: #047857; border: 1px solid #a7f3d0; }
+.role-badge--admin { background: #fef3c7; color: #b45309; border: 1px solid #fde68a; }
+
+.profile-menu { position: absolute; right: 0; top: 52px; width: 280px; background: #fff; border: 1px solid var(--line); border-radius: var(--r-lg); box-shadow: var(--sh-2); padding: 14px; z-index: 50; display: flex; flex-direction: column; gap: 10px; }
+.profile-menu__user { display: flex; align-items: center; gap: 10px; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+.profile-menu__user-info { display: flex; flex-direction: column; min-width: 0; }
+.profile-menu__user-info strong { font-size: 0.9rem; color: var(--navy-900); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.profile-menu__user-info span { font-size: 0.75rem; color: var(--ink-soft); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.profile-menu__section-title { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; color: var(--ink-faint); letter-spacing: 0.04em; margin-top: 2px; }
+.profile-menu__switchers { display: flex; flex-direction: column; gap: 4px; }
+.profile-menu__switch-btn { display: flex; align-items: center; justify-content: space-between; padding: 6px 8px; border-radius: var(--r-sm); border: 1px solid transparent; background: transparent; color: var(--ink); font-size: 0.82rem; cursor: pointer; text-align: left; }
+.profile-menu__switch-btn:hover { background: var(--wash); border-color: var(--line); }
+.profile-menu__switch-btn--active { background: var(--teal-50); border-color: var(--teal-200); font-weight: 600; }
+
+.profile-menu__logout { display: flex; align-items: center; justify-content: center; gap: 6px; padding: 8px; margin-top: 4px; border-top: 1px solid var(--line); border-bottom: none; border-left: none; border-right: none; background: transparent; color: var(--coral); font-size: 0.85rem; font-weight: 600; border-radius: var(--r-sm); cursor: pointer; transition: background 0.15s; }
+.profile-menu__logout:hover { background: var(--coral-bg); }
+
+/* Sidebar footer profile */
+.sidebar__user { margin-top: auto; padding: 12px; background: rgba(255, 255, 255, 0.06); border-radius: var(--r-md); border: 1px solid rgba(255, 255, 255, 0.1); display: flex; flex-direction: column; gap: 8px; }
+.sidebar__user-info { display: flex; align-items: center; gap: 10px; }
+.sidebar__user-avatar { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; font-size: 0.8rem; flex: none; }
+.sidebar__user-avatar--patient { background: #eef2ff; color: #4338ca; }
+.sidebar__user-avatar--doctor { background: #ecfdf5; color: #047857; }
+.sidebar__user-avatar--admin { background: #fef3c7; color: #b45309; }
+.sidebar__user-details { display: flex; flex-direction: column; min-width: 0; }
+.sidebar__user-name { font-size: 0.85rem; font-weight: 600; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sidebar__logout-btn { display: flex; align-items: center; justify-content: center; gap: 6px; padding: 6px; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: var(--r-sm); background: transparent; color: rgba(255, 255, 255, 0.8); font-size: 0.78rem; cursor: pointer; transition: all 0.15s ease; }
+.sidebar__logout-btn:hover { background: rgba(204, 63, 63, 0.2); border-color: rgba(204, 63, 63, 0.4); color: #fff; }
 
 @media (max-width: 960px) {
   .sidebar { transform: translateX(-100%); transition: transform 0.25s ease; box-shadow: var(--sh-2); }
