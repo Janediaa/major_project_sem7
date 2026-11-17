@@ -28,7 +28,7 @@ export default function MyAppointments() {
     () =>
       appointments
         .filter((a) => (filter === 'all' || a.status === filter) && (!query || a.patient.toLowerCase().includes(query.toLowerCase())))
-        .sort((a, b) => b.date.localeCompare(a.date) || timeToMinutes(b.time) - timeToMinutes(a.time)),
+        .sort((a, b) => a.date.localeCompare(b.date) || timeToMinutes(a.time) - timeToMinutes(b.time)),
     [appointments, filter, query]
   );
 
@@ -39,7 +39,7 @@ export default function MyAppointments() {
     <div className="page">
       <PageHeader
         title="My Appointments"
-        description="Every appointment, newest first. Open one to see the patient’s details."
+        description="Every appointment in chronological order (earliest first). Open one to see the patient’s details."
         badge={
           <span className="role-badge role-badge--doctor" style={{ display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
             <CalendarCheck2 size={12} /> Confirmed OPD
