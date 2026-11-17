@@ -1,0 +1,11 @@
+{
+  "name": "healthcare-navigator",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Agentic AI Healthcare Navigator - Multi-agent care assistant",
+  "scripts": {
+    "build": "npm --prefix frontend run build",
+    "dev": "npm --prefix frontend run dev",
+    "preview": "npm --prefix frontend run preview"
+  }
+}
