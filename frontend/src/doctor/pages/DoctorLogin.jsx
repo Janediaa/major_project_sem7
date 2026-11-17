@@ -57,6 +57,39 @@ export default function DoctorLogin() {
             Sign in with your verified doctor account or clinic email to access your outpatient schedule, patient requests, and availability controls.
           </Notice>
 
+          <button
+            type="button"
+            className="btn btn--block"
+            style={{
+              background: '#047857',
+              color: '#ffffff',
+              border: 'none',
+              padding: '0.75rem 1rem',
+              fontWeight: 600,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '0.5rem',
+              cursor: 'pointer',
+              marginBottom: '0.75rem',
+            }}
+            onClick={() => {
+              setEmail('doctor@healthnavigator.ai');
+              setPassword('demo-doctor-pass');
+              try {
+                localStorage.setItem(REMEMBER_KEY, 'doctor@healthnavigator.ai');
+              } catch {}
+              login('doctor@healthnavigator.ai');
+              navigate('/doctor', { replace: true });
+            }}
+          >
+            <ShieldCheck size={18} /> One-Click Sign In as Dr. Ananya Rao
+          </button>
+
+          <div style={{ textAlign: 'center', margin: '0.5rem 0 1rem', color: 'var(--muted)', fontSize: '0.85rem' }}>
+            — or enter credentials below —
+          </div>
+
           <label className="stack">
             <span className="label">Email</span>
             <span className="field field--icon">
