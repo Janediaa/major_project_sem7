@@ -52,9 +52,31 @@ export default function DoctorHospital() {
     setRecentHistory(loadSearchHistory(user?.id));
   }, [user?.id]);
 
+  const handleSearchSubmit = (e) => {
+    if (e) e.preventDefault();
+    const textToSave = query.trim() || location.trim();
+    if (textToSave) {
+      const updated = saveSearchItem(user?.id, textToSave, '/doctor-hospital');
+      if (updated) setRecentHistory(updated);
+    }
+  };
+
   const handleSearchKeyDown = (e) => {
-    if (e.key === 'Enter' && query.trim()) {
-      const updated = saveSearchItem(user?.id, query.trim(), '/doctor-hospital');
+    if (e.key === 'Enter') {
+      handleSearchSubmit(e);
+    }
+  };
+
+  const handleRecentChipClick = (chipQuery) => {
+    setQuery(chipQuery);
+    const updated = saveSearchItem(user?.id, chipQuery, '/doctor-hospital');
+    if (updated) setRecentHistory(updated);
+  };
+
+  const handleSpecialtyClick = (s) => {
+    setSpecialty(s);
+    if (s !== 'All') {
+      const updated = saveSearchItem(user?.id, s, '/doctor-hospital');
       if (updated) setRecentHistory(updated);
     }
   };
@@ -129,15 +151,23 @@ export default function DoctorHospital() {
     );
   }, [doctorsData]);
 
+  const queryTokens = useMemo(() => {
+    if (!query.trim()) return [];
+    return query
+      .toLowerCase()
+      .split(/\s+/)
+      .filter((w) => w && !['in', 'at', 'near', 'and', 'the', 'of', 'for'].includes(w));
+  }, [query]);
+
   // Filter actual doctors
   const doctors = useMemo(
     () =>
       doctorsData.filter((d) => {
-        const matchesQuery =
-          !query ||
-          has(d.doctor_name, query) ||
-          has(d.doctor_type, query) ||
-          has(d.hospital_name, query);
+        let matchesQuery = true;
+        if (queryTokens.length > 0) {
+          const docText = `${d.doctor_name || ''} ${d.doctor_type || ''} ${d.specialization || ''} ${d.hospital_name || ''} ${d.city || ''} ${d.location || ''}`.toLowerCase();
+          matchesQuery = queryTokens.every((t) => docText.includes(t));
+        }
 
         const matchesLocation =
           !location ||
@@ -146,7 +176,8 @@ export default function DoctorHospital() {
 
         const matchesSpecialty =
           specialty === 'All' ||
-          d.doctor_type === specialty;
+          d.doctor_type === specialty ||
+          d.specialization === specialty;
 
         return (
           matchesQuery &&
@@ -154,16 +185,18 @@ export default function DoctorHospital() {
           matchesSpecialty
         );
       }),
-    [doctorsData, query, location, specialty]
+    [doctorsData, queryTokens, location, specialty]
   );
 
   // Filter actual hospitals
   const hospitals = useMemo(
     () =>
       hospitalsData.filter((h) => {
-        const matchesQuery =
-          !query ||
-          has(h.hospital_name, query);
+        let matchesQuery = true;
+        if (queryTokens.length > 0) {
+          const hospText = `${h.hospital_name || ''} ${h.city || ''} ${h.location || ''}`.toLowerCase();
+          matchesQuery = queryTokens.every((t) => hospText.includes(t));
+        }
 
         const matchesLocation =
           !location ||
@@ -173,9 +206,8 @@ export default function DoctorHospital() {
           specialty === 'All' ||
           doctorsData.some(
             (d) =>
-              d.hospital_name === h.hospital_name &&
-              d.city === h.city &&
-              d.doctor_type === specialty
+              (d.hospital_name === h.hospital_name || d.hospital_id === h.hospital_id) &&
+              (d.doctor_type === specialty || d.specialization === specialty)
           );
 
         return (
@@ -184,7 +216,7 @@ export default function DoctorHospital() {
           matchesSpecialty
         );
       }),
-    [hospitalsData, doctorsData, query, location, specialty]
+    [hospitalsData, doctorsData, queryTokens, location, specialty]
   );
 
   const showDoctors = tab !== 'hospitals';
@@ -240,6 +272,15 @@ export default function DoctorHospital() {
               aria-label="Location"
             />
           </label>
+
+          <button
+            type="button"
+            className="btn btn--primary"
+            onClick={handleSearchSubmit}
+            style={{ padding: '0 1.25rem', whiteSpace: 'nowrap' }}
+          >
+            <Search size={16} /> Search
+          </button>
         </div>
 
         {recentHistory.length > 0 && (
@@ -252,7 +293,7 @@ export default function DoctorHospital() {
                 key={item.id}
                 type="button"
                 className="search-history-chip"
-                onClick={() => setQuery(item.query)}
+                onClick={() => handleRecentChipClick(item.query)}
               >
                 <Clock size={11} style={{ opacity: 0.7 }} />
                 <span>{item.query}</span>
@@ -289,7 +330,7 @@ export default function DoctorHospital() {
               className={`chip chip--btn ${
                 specialty === s ? 'is-active' : ''
               }`}
-              onClick={() => setSpecialty(s)}
+              onClick={() => handleSpecialtyClick(s)}
               aria-pressed={specialty === s}
             >
               {s}
