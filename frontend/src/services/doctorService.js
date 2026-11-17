@@ -94,10 +94,17 @@ export async function getLiveDoctorAppointments(doctorId = 1) {
     age: b.patient_age || 28,
     gender: b.patient_sex || 'Female',
     reason: b.reason || 'Specialist Consultation',
-    status: b.status === 'cancelled' ? 'rejected' : b.status === 'attended' ? 'completed' : 'confirmed',
+    status:
+      b.status === 'cancelled'
+        ? 'rejected'
+        : b.status === 'attended' || b.status === 'completed'
+        ? 'completed'
+        : b.status === 'pending'
+        ? 'pending'
+        : 'confirmed',
     notes: b.reason || 'Booked online via patient portal.',
-    requested: 'Patient Portal',
-    rejectionReason: '',
+    requested: b.status === 'pending' ? 'Patient Portal' : null,
+    rejectionReason: b.rejectionReason || '',
     phone: b.patient_phone || '+91 98765 43210',
     source: 'user_booking',
   }));
@@ -163,12 +170,21 @@ export async function persistAppointmentStatus(id, nextStatus, rejectionReason =
       if (rawUserBookings) {
         const bookings = JSON.parse(rawUserBookings);
         const mappedUserStatus =
-          nextStatus === 'rejected' ? 'cancelled' : nextStatus === 'completed' ? 'attended' : 'scheduled';
-        const updatedBookings = bookings.map((b) =>
-          b.booking_reference === target.bookingReference || b.appointment_id === target.backendId
-            ? { ...b, status: mappedUserStatus }
-            : b
-        );
+          nextStatus === 'rejected'
+            ? 'cancelled'
+            : nextStatus === 'completed'
+            ? 'completed'
+            : 'confirmed';
+        const updatedBookings = bookings.map((b) => {
+          const isMatch =
+            b.booking_reference === target.bookingReference ||
+            String(b.appointment_id) === String(target.backendId) ||
+            `usr-${b.appointment_id}` === target.id ||
+            `usr-${b.booking_reference}` === target.id;
+          return isMatch
+            ? { ...b, status: mappedUserStatus, rejectionReason: rejectionReason || b.rejectionReason || '' }
+            : b;
+        });
         localStorage.setItem(DOCTOR_STORAGE_KEYS.USER_BOOKINGS, JSON.stringify(updatedBookings));
       }
     } catch (err) {
