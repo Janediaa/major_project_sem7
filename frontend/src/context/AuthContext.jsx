@@ -5,7 +5,6 @@ const AuthContext = createContext(null);
 export const ROLES = {
   PATIENT: 'patient',
   DOCTOR: 'doctor',
-  ADMIN: 'admin',
 };
 
 export const DEMO_ACCOUNTS = {
@@ -19,31 +18,22 @@ export const DEMO_ACCOUNTS = {
     sex: 'Female',
     avatar: 'AS',
     headline: 'Patient / Healthcare Seeker',
-    bio: 'Looking for cardiologist consultation and preventive care tracking.',
+    bio: 'Looking for doctor consultation, appointments, and preventive care tracking.',
   },
   [ROLES.DOCTOR]: {
     id: 'demo-doctor-1',
-    name: 'Dr. Sarah Jenkins',
-    email: 'dr.jenkins@healthnavigator.ai',
+    name: 'Dr. Ananya Rao',
+    email: 'doctor@healthnavigator.ai',
     role: ROLES.DOCTOR,
-    phone: '+91 98200 12345',
-    specialization: 'Cardiologist',
-    hospital: 'Apollo Spectra Hospitals',
+    phone: '+91 90000 00000',
+    specialization: 'Pulmonology',
+    hospital: 'Sunrise Chest & Allergy Clinic',
+    location: 'Delhi',
+    fee: 800,
     doctorId: 1,
-    avatar: 'SJ',
-    headline: 'Senior Cardiologist & Care Lead',
-    bio: 'Cardiology specialist reviewing patient appointment schedules & triage.',
-  },
-  [ROLES.ADMIN]: {
-    id: 'demo-admin-1',
-    name: 'Dr. Raymond Holt',
-    email: 'admin@healthnavigator.ai',
-    role: ROLES.ADMIN,
-    phone: '+91 98111 22334',
-    department: 'Hospital System Administration',
-    avatar: 'RH',
-    headline: 'Chief Medical & System Administrator',
-    bio: 'Platform superintendent overseeing clinical workflows, schedules & AI agents.',
+    avatar: 'AR',
+    headline: 'Consultant Pulmonologist & Clinical Lead',
+    bio: 'Focuses on asthma, COPD and long-term cough, with an interest in patient education.',
   },
 };
 
