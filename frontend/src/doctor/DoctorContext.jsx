@@ -1,5 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { ROLES, useAuth } from '../context/AuthContext';
+import { saveCustomDoctor } from '../services/healthcareService';
 import {
   appendDoctorActivity,
   getLiveDoctorAppointments,
@@ -144,6 +145,18 @@ export function DoctorProvider({ children }) {
   const updateProfile = (next) => {
     setProfile(next);
     saveDoctorProfile(next);
+    saveCustomDoctor({
+      doctor_id: `doc-${(next.email || 'ananya').replace(/[@.]/g, '_')}`,
+      doctor_name: next.name,
+      doctor_type: next.specialization,
+      specialization: next.specialization,
+      hospital_name: next.hospital,
+      city: next.location || 'Delhi',
+      fees: next.fee || 800,
+      phone: next.phone,
+      email: next.email,
+      experience_years: next.experienceYears || 14,
+    });
     if (auth?.updateUser) {
       auth.updateUser({
         name: next.name,
