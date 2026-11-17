@@ -31,6 +31,9 @@ export default function Auth() {
   const [password, setPassword] = useState('');
   const [phone, setPhone] = useState('');
   const [specialization, setSpecialization] = useState('Cardiology');
+  const [hospital, setHospital] = useState('Care Plus Super Specialty Clinic');
+  const [city, setCity] = useState('Delhi');
+  const [fee, setFee] = useState('800');
   const [age, setAge] = useState('');
   const [sex, setSex] = useState('Female');
 
@@ -97,6 +100,9 @@ export default function Auth() {
         role: selectedRole,
         phone,
         specialization: selectedRole === ROLES.DOCTOR ? specialization : '',
+        hospital: selectedRole === ROLES.DOCTOR ? hospital : '',
+        city: selectedRole === ROLES.DOCTOR ? city : '',
+        fee: selectedRole === ROLES.DOCTOR ? Number(fee) || 750 : 750,
         age: selectedRole === ROLES.PATIENT ? age : '',
         sex: selectedRole === ROLES.PATIENT ? sex : '',
       });
@@ -369,21 +375,63 @@ export default function Auth() {
             </div>
 
             {selectedRole === ROLES.DOCTOR && (
-              <div className="auth-field">
-                <label htmlFor="reg-specialization">Medical Specialization</label>
-                <div className="auth-input-wrap">
-                  <Stethoscope size={16} className="auth-input-icon" />
+              <>
+                <div className="auth-field">
+                  <label htmlFor="reg-specialization">Medical Specialization</label>
+                  <div className="auth-input-wrap">
+                    <Stethoscope size={16} className="auth-input-icon" />
+                    <input
+                      id="reg-specialization"
+                      type="text"
+                      required
+                      className="auth-input"
+                      placeholder="e.g. Cardiology, Neurology, General Physician"
+                      value={specialization}
+                      onChange={(e) => setSpecialization(e.target.value)}
+                    />
+                  </div>
+                </div>
+
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
+                  <div className="auth-field">
+                    <label htmlFor="reg-hospital">Hospital / Clinic</label>
+                    <input
+                      id="reg-hospital"
+                      type="text"
+                      className="auth-input"
+                      style={{ paddingLeft: '0.85rem' }}
+                      placeholder="e.g. Apollo Hospital"
+                      value={hospital}
+                      onChange={(e) => setHospital(e.target.value)}
+                    />
+                  </div>
+                  <div className="auth-field">
+                    <label htmlFor="reg-city">City</label>
+                    <input
+                      id="reg-city"
+                      type="text"
+                      className="auth-input"
+                      style={{ paddingLeft: '0.85rem' }}
+                      placeholder="e.g. Delhi, Mumbai"
+                      value={city}
+                      onChange={(e) => setCity(e.target.value)}
+                    />
+                  </div>
+                </div>
+
+                <div className="auth-field">
+                  <label htmlFor="reg-fee">Consultation Fee (₹)</label>
                   <input
-                    id="reg-specialization"
-                    type="text"
-                    required
+                    id="reg-fee"
+                    type="number"
                     className="auth-input"
-                    placeholder="e.g. Cardiology, Neurology, General Physician"
-                    value={specialization}
-                    onChange={(e) => setSpecialization(e.target.value)}
+                    style={{ paddingLeft: '0.85rem' }}
+                    placeholder="800"
+                    value={fee}
+                    onChange={(e) => setFee(e.target.value)}
                   />
                 </div>
-              </div>
+              </>
             )}
 
             {selectedRole === ROLES.PATIENT && (
