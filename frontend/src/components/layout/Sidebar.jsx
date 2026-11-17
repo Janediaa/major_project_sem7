@@ -1,16 +1,27 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import { LogOut, Stethoscope, X } from 'lucide-react';
 import { MODULES, STATUS } from '../../config/modules';
-import { useAuth } from '../../context/AuthContext';
+import { ROLES, useAuth } from '../../context/AuthContext';
 import Logo from './Logo';
 
 export default function Sidebar({ open, onClose }) {
-  const { user, role, logout } = useAuth();
+  const { user, role, logout, switchToRole, loginAsDemo } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = () => {
     logout();
     navigate('/login', { replace: true });
+  };
+
+  const handleSwapToDoctor = (e) => {
+    e.preventDefault();
+    if (switchToRole) {
+      switchToRole(ROLES.DOCTOR);
+    } else if (loginAsDemo) {
+      loginAsDemo(ROLES.DOCTOR);
+    }
+    navigate('/doctor');
+    if (onClose) onClose();
   };
 
   return (
@@ -46,16 +57,34 @@ export default function Sidebar({ open, onClose }) {
           </NavLink>
         ))}
 
-        {role === 'doctor' && (
-          <NavLink
-            to="/doctor"
-            className={({ isActive }) => `nav-link ${isActive ? 'nav-link--active' : ''}`}
-            style={{ marginTop: '0.5rem', background: '#ecfdf5', color: '#047857', fontWeight: 600 }}
+        <div style={{ marginTop: '0.5rem', paddingTop: '0.5rem', borderTop: '1px solid var(--border)' }}>
+          <button
+            type="button"
+            className="nav-link"
+            style={{
+              width: '100%',
+              textAlign: 'left',
+              background: '#f0fdf4',
+              color: '#047857',
+              fontWeight: 600,
+              border: '1px solid #bbf7d0',
+              borderRadius: 'var(--r-md)',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.6rem',
+              padding: '0.6rem 0.75rem',
+            }}
+            onClick={handleSwapToDoctor}
+            title="Swap to Doctor OPD Console"
           >
             <Stethoscope size={19} aria-hidden="true" />
-            <span>Doctor Portal</span>
-          </NavLink>
-        )}
+            <span style={{ flex: 1 }}>Doctor Portal</span>
+            <span style={{ fontSize: '0.75rem', background: '#dcfce7', padding: '0.15rem 0.45rem', borderRadius: '4px' }}>
+              Swap &rarr;
+            </span>
+          </button>
+        </div>
       </nav>
 
       <div className="sidebar__user">

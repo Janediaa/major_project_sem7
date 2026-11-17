@@ -10,13 +10,9 @@ import { getAppointmentStats, getHealthStatus } from '../services/appointmentSer
 import { ROLES, useAuth } from '../context/AuthContext';
 
 export default function Dashboard() {
-  const { role, user } = useAuth();
+  const { role, user, switchToRole } = useAuth();
   const [stats, setStats] = useState(null);
   const [health, setHealth] = useState(null);
-
-  if (role === ROLES.DOCTOR) {
-    return <Navigate to="/doctor" replace />;
-  }
 
   useEffect(() => {
     let active = true;
@@ -34,6 +30,44 @@ export default function Dashboard() {
 
   return (
     <div className="page dashboard">
+      {/* Clinician viewing Patient Portal notice */}
+      {role === ROLES.DOCTOR && (
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            flexWrap: 'wrap',
+            gap: '0.65rem',
+            padding: '0.75rem 1.25rem',
+            borderRadius: 'var(--r-md)',
+            background: '#ecfdf5',
+            border: '1px solid #a7f3d0',
+            marginBottom: '1rem',
+          }}
+        >
+          <span style={{ fontSize: '0.875rem', color: '#065f46' }}>
+            Previewing Patient Portal as <strong>{user?.name || 'Dr. Ananya Rao'}</strong> (Clinician).
+          </span>
+          <div style={{ display: 'flex', gap: '0.5rem' }}>
+            <button
+              type="button"
+              className="btn btn--secondary btn--sm"
+              onClick={() => switchToRole && switchToRole(ROLES.PATIENT)}
+              style={{ fontSize: '0.8rem', padding: '0.25rem 0.65rem' }}
+            >
+              Switch to Patient Account
+            </button>
+            <Link
+              to="/doctor"
+              className="btn btn--primary btn--sm"
+              style={{ fontSize: '0.8rem', padding: '0.25rem 0.65rem', background: '#047857', border: 'none' }}
+            >
+              Return to Doctor OPD Console &rarr;
+            </Link>
+          </div>
+        </div>
+      )}
       {/* Patient Portal Welcome Banner */}
       <div
         style={{

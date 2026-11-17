@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Eye, EyeOff, Lock, Mail, ShieldCheck } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { ArrowLeft, Eye, EyeOff, Lock, Mail, ShieldCheck } from 'lucide-react';
 import Logo from '../../components/layout/Logo';
 import Notice from '../../components/common/Notice';
 import { useDoctor } from '../DoctorContext';
@@ -50,6 +50,23 @@ export default function DoctorLogin() {
 
       <section className="dr-login__panel">
         <form className="dr-login__form" onSubmit={submit} noValidate>
+          <div style={{ marginBottom: '0.75rem' }}>
+            <Link
+              to="/"
+              className="dr-link"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.35rem',
+                fontSize: '0.85rem',
+                color: 'var(--teal-600, #0d9488)',
+                textDecoration: 'none',
+                fontWeight: 500,
+              }}
+            >
+              <ArrowLeft size={14} /> Back to Patient Portal
+            </Link>
+          </div>
           <h2>Doctor sign in</h2>
           <p className="muted">Use your clinic email to continue.</p>
 

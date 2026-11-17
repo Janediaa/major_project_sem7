@@ -22,16 +22,14 @@ export function DoctorProvider({ children }) {
     if (auth?.user && auth.user.role === ROLES.DOCTOR) {
       return { email: auth.user.email, name: auth.user.name };
     }
-    try {
-      const saved = localStorage.getItem('doctor-portal-demo-email');
-      if (saved) return { email: saved, name: 'Dr. Ananya Rao' };
-    } catch {}
     return null;
   });
 
   useEffect(() => {
     if (auth?.user && auth.user.role === ROLES.DOCTOR) {
       setSession({ email: auth.user.email, name: auth.user.name });
+    } else {
+      setSession(null);
     }
   }, [auth?.user]);
 
@@ -47,6 +45,17 @@ export function DoctorProvider({ children }) {
     }
     return stored;
   });
+
+  useEffect(() => {
+    if (auth?.user && auth.user.role === ROLES.DOCTOR && auth.user.name) {
+      setProfile((prev) => ({
+        ...prev,
+        name: auth.user.name.startsWith('Dr.') ? auth.user.name : `Dr. ${auth.user.name}`,
+        email: auth.user.email || prev.email || DEMO_DOCTOR.email,
+        specialization: auth.user.specialization || prev.specialization || DEMO_DOCTOR.specialization,
+      }));
+    }
+  }, [auth?.user]);
 
   const [appointments, setAppointments] = useState([]);
   const [activity, setActivity] = useState(getStoredDoctorActivity);

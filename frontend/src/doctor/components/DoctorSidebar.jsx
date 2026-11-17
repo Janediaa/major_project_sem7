@@ -2,6 +2,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { ArrowLeftRight, CalendarCheck2, CalendarClock, Inbox, LayoutDashboard, LogOut, UserRound, Users, X } from 'lucide-react';
 import Logo from '../../components/layout/Logo';
 import { useDoctor } from '../DoctorContext';
+import { ROLES, useAuth } from '../../context/AuthContext';
 
 const LINKS = [
   { to: '/doctor', label: 'Dashboard', icon: LayoutDashboard, end: true },
@@ -14,12 +15,24 @@ const LINKS = [
 
 export default function DoctorSidebar({ open, onClose }) {
   const { appointments, logout } = useDoctor();
+  const auth = useAuth();
   const navigate = useNavigate();
   const pending = appointments.filter((a) => a.status === 'pending').length;
 
   const handleLogout = () => {
     logout();
     navigate('/login', { replace: true });
+  };
+
+  const handleSwapToPatient = (e) => {
+    e.preventDefault();
+    if (auth?.switchToRole) {
+      auth.switchToRole(ROLES.PATIENT);
+    } else if (auth?.loginAsDemo) {
+      auth.loginAsDemo(ROLES.PATIENT);
+    }
+    navigate('/');
+    if (onClose) onClose();
   };
 
   return (
@@ -42,10 +55,29 @@ export default function DoctorSidebar({ open, onClose }) {
           </NavLink>
         ))}
 
-        <NavLink to="/" className="nav-link" style={{ marginTop: '0.5rem', borderTop: '1px solid var(--border)' }}>
+        <button
+          type="button"
+          onClick={handleSwapToPatient}
+          className="nav-link"
+          style={{
+            marginTop: '0.5rem',
+            borderTop: '1px solid var(--border)',
+            background: 'transparent',
+            width: '100%',
+            textAlign: 'left',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.6rem',
+          }}
+          title="Swap to Patient Portal"
+        >
           <ArrowLeftRight size={19} aria-hidden="true" />
-          <span>Patient Portal</span>
-        </NavLink>
+          <span style={{ flex: 1 }}>Patient Portal</span>
+          <span style={{ fontSize: '0.75rem', background: 'var(--wash, #f1f5f9)', color: 'var(--ink, #334155)', padding: '0.15rem 0.45rem', borderRadius: '4px' }}>
+            Swap &rarr;
+          </span>
+        </button>
 
         <button type="button" className="nav-link dr-logout" onClick={handleLogout}>
           <LogOut size={19} aria-hidden="true" />

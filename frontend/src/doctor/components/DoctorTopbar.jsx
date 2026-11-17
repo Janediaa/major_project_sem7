@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Bell, Menu, Search } from 'lucide-react';
 import { useDoctor } from '../DoctorContext';
+import { ROLES, useAuth } from '../../context/AuthContext';
 
 const TITLES = {
   '/doctor': 'Dashboard',
@@ -15,6 +16,7 @@ const TITLES = {
 export default function DoctorTopbar({ onMenu }) {
   const { pathname } = useLocation();
   const navigate = useNavigate();
+  const auth = useAuth();
   const { profile, appointments } = useDoctor();
   const [q, setQ] = useState('');
   const pending = appointments.filter((a) => a.status === 'pending').length;
@@ -24,6 +26,16 @@ export default function DoctorTopbar({ onMenu }) {
     const t = q.trim();
     if (t) navigate(`/doctor/appointments?q=${encodeURIComponent(t)}`);
     setQ('');
+  };
+
+  const handleSwapToPatient = (e) => {
+    e.preventDefault();
+    if (auth?.switchToRole) {
+      auth.switchToRole(ROLES.PATIENT);
+    } else if (auth?.loginAsDemo) {
+      auth.loginAsDemo(ROLES.PATIENT);
+    }
+    navigate('/');
   };
 
   return (
@@ -40,14 +52,24 @@ export default function DoctorTopbar({ onMenu }) {
       </form>
 
       <div className="topbar__actions">
-        <Link
-          to="/"
+        <button
+          type="button"
+          onClick={handleSwapToPatient}
           className="btn btn--ghost btn--sm"
-          style={{ fontSize: '0.8125rem', padding: '0.35rem 0.75rem', borderRadius: 'var(--r-full)' }}
-          title="Switch to Patient Portal"
+          style={{
+            fontSize: '0.8125rem',
+            padding: '0.35rem 0.75rem',
+            borderRadius: 'var(--r-full)',
+            cursor: 'pointer',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '0.35rem',
+            fontWeight: 500,
+          }}
+          title="Swap to Patient Portal"
         >
           Patient View &rarr;
-        </Link>
+        </button>
         <Link to="/doctor/requests" className="icon-btn dr-bell" aria-label={`Appointment requests, ${pending} pending`}>
           <Bell size={20} />
           {pending > 0 && <span className="dr-bell__dot">{pending}</span>}

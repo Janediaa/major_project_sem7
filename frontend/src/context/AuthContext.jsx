@@ -67,6 +67,55 @@ export function AuthProvider({ children }) {
     setUser(userData);
     localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(userData));
     localStorage.setItem(TOKEN_STORAGE_KEY, token);
+
+    // Keep memory of active accounts for seamless role swapping
+    if (userData?.role === ROLES.PATIENT) {
+      localStorage.setItem('hn_last_patient_account', JSON.stringify(userData));
+    } else if (userData?.role === ROLES.DOCTOR) {
+      localStorage.setItem('hn_last_doctor_account', JSON.stringify(userData));
+    }
+  };
+
+  const switchToRole = (targetRole) => {
+    // 1. Snapshot current user in role memory
+    if (user && user.role) {
+      if (user.role === ROLES.PATIENT) {
+        localStorage.setItem('hn_last_patient_account', JSON.stringify(user));
+      } else if (user.role === ROLES.DOCTOR) {
+        localStorage.setItem('hn_last_doctor_account', JSON.stringify(user));
+      }
+    }
+
+    // 2. Load target role from memory, fallback to demo account
+    if (targetRole === ROLES.PATIENT) {
+      try {
+        const lastPatient = localStorage.getItem('hn_last_patient_account');
+        if (lastPatient) {
+          const parsed = JSON.parse(lastPatient);
+          if (parsed && parsed.role === ROLES.PATIENT) {
+            saveSession(parsed);
+            return parsed;
+          }
+        }
+      } catch {}
+      const fallback = DEMO_ACCOUNTS[ROLES.PATIENT];
+      saveSession(fallback);
+      return fallback;
+    } else if (targetRole === ROLES.DOCTOR) {
+      try {
+        const lastDoctor = localStorage.getItem('hn_last_doctor_account');
+        if (lastDoctor) {
+          const parsed = JSON.parse(lastDoctor);
+          if (parsed && parsed.role === ROLES.DOCTOR) {
+            saveSession(parsed);
+            return parsed;
+          }
+        }
+      } catch {}
+      const fallback = DEMO_ACCOUNTS[ROLES.DOCTOR];
+      saveSession(fallback);
+      return fallback;
+    }
   };
 
   const login = async (email, password, roleHint = ROLES.PATIENT) => {
@@ -216,6 +265,9 @@ export function AuthProvider({ children }) {
     setUser(null);
     localStorage.removeItem(USER_STORAGE_KEY);
     localStorage.removeItem(TOKEN_STORAGE_KEY);
+    try {
+      localStorage.removeItem('doctor-portal-demo-email');
+    } catch {}
   };
 
   const updateUser = (fields) => {
@@ -239,6 +291,7 @@ export function AuthProvider({ children }) {
     loading,
     login,
     loginAsDemo,
+    switchToRole,
     register,
     logout,
     updateUser,
