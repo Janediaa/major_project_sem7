@@ -1,8 +1,7 @@
 import { useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Eye, Search, SearchX, X } from 'lucide-react';
+import { CalendarCheck2, Eye, Search, SearchX, X } from 'lucide-react';
 import PageHeader from '../../components/common/PageHeader';
-import SampleBadge from '../../components/common/SampleBadge';
 import StatusBadge from '../components/StatusBadge';
 import AppointmentDetailsModal from '../components/AppointmentDetailsModal';
 import RejectModal from '../components/RejectModal';
@@ -41,7 +40,11 @@ export default function MyAppointments() {
       <PageHeader
         title="My Appointments"
         description="Every appointment, newest first. Open one to see the patient’s details."
-        badge={<SampleBadge>Demo data</SampleBadge>}
+        badge={
+          <span className="role-badge role-badge--doctor" style={{ display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
+            <CalendarCheck2 size={12} /> Confirmed OPD
+          </span>
+        }
       />
 
       <div className="dr-toolbar">

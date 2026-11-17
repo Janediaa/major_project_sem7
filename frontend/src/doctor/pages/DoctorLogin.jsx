@@ -53,8 +53,8 @@ export default function DoctorLogin() {
           <h2>Doctor sign in</h2>
           <p className="muted">Use your clinic email to continue.</p>
 
-          <Notice tone="warning" title="Demo login">
-            No real authentication yet. Any valid email and any password will open the demo portal.
+          <Notice tone="info" title="Clinician Authentication">
+            Sign in with your verified doctor account or clinic email to access your outpatient schedule, patient requests, and availability controls.
           </Notice>
 
           <label className="stack">

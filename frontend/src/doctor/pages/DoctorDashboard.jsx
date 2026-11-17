@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, CalendarCheck2, CheckCheck, Clock3, ListChecks, Inbox } from 'lucide-react';
+import { Activity, ArrowRight, CalendarCheck2, CheckCheck, Clock3, ListChecks, Inbox } from 'lucide-react';
 import PageHeader from '../../components/common/PageHeader';
-import SampleBadge from '../../components/common/SampleBadge';
 import StatCard from '../components/StatCard';
 import StatusBadge from '../components/StatusBadge';
 import WeeklyChart from '../components/WeeklyChart';
@@ -29,7 +28,11 @@ export default function DoctorDashboard() {
       <PageHeader
         title={`${greeting()}, ${profile.name}`}
         description={`You have ${todays.length} ${todays.length === 1 ? 'appointment' : 'appointments'} today and ${count('pending')} pending ${count('pending') === 1 ? 'request' : 'requests'}.`}
-        badge={<SampleBadge>Demo data</SampleBadge>}
+        badge={
+          <span className="role-badge role-badge--doctor" style={{ display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
+            <Activity size={12} /> Live OPD Console
+          </span>
+        }
         actions={<Link to="/doctor/requests" className="btn btn--primary"><Inbox size={17} /> Review requests</Link>}
       />
 

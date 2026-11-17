@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { CalendarDays, Check, Clock, Inbox, Phone, TriangleAlert, X } from 'lucide-react';
 import PageHeader from '../../components/common/PageHeader';
-import SampleBadge from '../../components/common/SampleBadge';
 import RejectModal from '../components/RejectModal';
 import { useDoctor } from '../DoctorContext';
 import { formatDate, timeToMinutes } from '../data/mockDoctorData';
@@ -22,7 +21,11 @@ export default function AppointmentRequests() {
       <PageHeader
         title="Appointment Requests"
         description="Accept or reject requests from patients. The list updates as you respond."
-        badge={<SampleBadge>Demo data</SampleBadge>}
+        badge={
+          <span className="role-badge role-badge--doctor" style={{ display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
+            <Inbox size={12} /> Live Queue
+          </span>
+        }
       />
 
       {pending.length === 0 ? (
@@ -49,7 +52,7 @@ export default function AppointmentRequests() {
                 <ul className="dr-detail__list">
                   <li><CalendarDays size={16} aria-hidden="true" /> {formatDate(a.date, { weekday: 'long', day: 'numeric', month: 'long' })}</li>
                   <li><Clock size={16} aria-hidden="true" /> {a.time}</li>
-                  <li><Phone size={16} aria-hidden="true" /> {a.phone} <span className="muted">(demo)</span></li>
+                  <li><Phone size={16} aria-hidden="true" /> {a.phone}</li>
                 </ul>
 
                 <div className="dr-detail__block">

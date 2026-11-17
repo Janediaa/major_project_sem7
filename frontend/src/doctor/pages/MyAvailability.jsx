@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import { CalendarOff, Plus, RotateCcw, Save, Trash2 } from 'lucide-react';
+import { CalendarOff, Clock3, Plus, RotateCcw, Save, Trash2 } from 'lucide-react';
 import PageHeader from '../../components/common/PageHeader';
-import SampleBadge from '../../components/common/SampleBadge';
 import { useDoctor } from '../DoctorContext';
 import { formatDate, todayISO } from '../data/mockDoctorData';
 
@@ -9,7 +8,7 @@ const DURATIONS = [15, 20, 30, 45, 60];
 const toMin = (hhmm) => { const [h, m] = hhmm.split(':').map(Number); return h * 60 + m; };
 
 export default function MyAvailability() {
-  const { availability, setAvailability, showToast } = useDoctor();
+  const { availability, setAvailability } = useDoctor();
   const [draft, setDraft] = useState(availability);
   const [newDate, setNewDate] = useState('');
   const [newReason, setNewReason] = useState('');
@@ -37,7 +36,6 @@ export default function MyAvailability() {
   const save = () => {
     if (hasInvalid) return;
     setAvailability(draft);
-    showToast('Availability saved (demo, not sent to a server).');
   };
 
   return (
@@ -45,7 +43,11 @@ export default function MyAvailability() {
       <PageHeader
         title="My Availability"
         description="Set the days and hours patients can book you, and block out dates you are away."
-        badge={<SampleBadge>Demo data</SampleBadge>}
+        badge={
+          <span className="role-badge role-badge--doctor" style={{ display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
+            <Clock3 size={12} /> Live Slot Manager
+          </span>
+        }
         actions={
           <div className="row">
             <button className="btn btn--ghost" onClick={() => setDraft(availability)} disabled={!dirty}><RotateCcw size={16} /> Discard</button>

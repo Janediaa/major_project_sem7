@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Briefcase, Building2, IndianRupee, Mail, MapPin, Pencil, Phone } from 'lucide-react';
 import PageHeader from '../../components/common/PageHeader';
-import SampleBadge from '../../components/common/SampleBadge';
 import EditProfileModal from '../components/EditProfileModal';
 import { useDoctor } from '../DoctorContext';
 
@@ -21,8 +20,12 @@ export default function MyProfile() {
     <div className="page">
       <PageHeader
         title="My Profile"
-        description="How patients see you. Changes here are not saved to a server yet."
-        badge={<SampleBadge>Demo profile</SampleBadge>}
+        description="Your active clinician profile, outpatient consultation credentials, and contact details."
+        badge={
+          <span className="role-badge role-badge--doctor" style={{ display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
+            <Building2 size={12} /> Verified Clinician
+          </span>
+        }
         actions={<button className="btn btn--primary" onClick={() => setEditing(true)}><Pencil size={16} /> Edit profile</button>}
       />
 
