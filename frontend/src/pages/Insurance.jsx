@@ -19,6 +19,12 @@ import {
   INSURANCE_SUGGESTIONS,
   POLICIES,
 } from "../data/sampleData";
+import {
+  answerInsuranceQuestion,
+  fetchAllInsuranceDocuments,
+  fetchPolicyFinderPolicies,
+  uploadInsurancePDF,
+} from "../services/insuranceService";
 
 const API_BASE_URL =
   import.meta.env.VITE_API_BASE_URL ||
@@ -78,40 +84,17 @@ export default function Insurance() {
     setFinderError("");
 
     try {
-      const params = new URLSearchParams();
-
-      // Category filter
-      if (finderCategory !== "all") {
-        params.set("category", finderCategory);
-      }
-
-      // Search
-      if (finderSearch.trim()) {
-        params.set("search", finderSearch.trim());
-      }
-
-      // Five filters
-      Object.entries(finderFilters).forEach(([key, value]) => {
-        if (value) {
-          params.set(key, value);
-        }
+      const data = await fetchPolicyFinderPolicies({
+        category: finderCategory,
+        search: finderSearch,
+        ...finderFilters,
       });
-
-      const response = await fetch(
-        `${API_BASE_URL}/api/policy-finder/cached-policies?${params.toString()}`,
-      );
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.detail || "Unable to fetch insurance policies.");
-      }
 
       setFinderPolicies(data.results || []);
       setFilterOptions(data.filter_options || {});
     } catch (err) {
       console.error("Policy Finder error:", err);
-      setFinderError(err.message);
+      setFinderError(err.message || "Failed to load policies.");
     } finally {
       setFinderLoading(false);
     }
@@ -148,34 +131,16 @@ export default function Insurance() {
     setDetailsError("");
   };
 
-  // Load uploaded documents from backend
+  // Load uploaded documents and verified baseline policies
   const fetchDocuments = async () => {
     try {
-      const response = await fetch(`${API_BASE_URL}/api/insurance/documents`);
-
-      if (!response.ok) {
-        throw new Error("Unable to load insurance documents.");
+      const docs = await fetchAllInsuranceDocuments();
+      setDocuments(docs);
+      if (docs.length > 0 && !selectedDocument) {
+        setSelectedDocument(docs[0].filename);
       }
-
-      const data = await response.json();
-
-      // Supports either an array or { documents: [...] }
-      const documentList = Array.isArray(data) ? data : data.documents || [];
-
-      setDocuments(
-        documentList
-          .map((doc) => ({
-            filename: typeof doc === "string" ? doc : doc.filename,
-            insurer: doc.insurer || "",
-            product_name: doc.product_name || "",
-          }))
-          .filter((doc) => doc.filename),
-      );
     } catch (err) {
-      console.error("Document loading error:", err);
-      setError(
-        "Could not load uploaded policies. Check whether the backend is running.",
-      );
+      console.warn("Document loading error:", err);
     }
   };
 
@@ -189,7 +154,7 @@ export default function Insurance() {
     }
   }, [activeModule]);
 
-  // Upload PDF to FastAPI
+  // Upload PDF with backend and client-side extraction support
   const handleUpload = async (e) => {
     const file = e.target.files?.[0];
 
@@ -210,35 +175,22 @@ export default function Insurance() {
     setAnswer(null);
 
     try {
-      const formData = new FormData();
-      formData.append("file", file);
-
-      const response = await fetch(`${API_BASE_URL}/api/insurance/upload`, {
-        method: "POST",
-        body: formData,
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.detail || "PDF upload failed.");
-      }
-
-      setUploadMessage(`${data.filename || file.name} uploaded successfully!`);
-
+      const res = await uploadInsurancePDF(file);
+      setUploadMessage(
+        `✓ ${res.filename} uploaded and indexed successfully! (${res.total_pages} pages, ${res.total_chunks} policy clauses)`
+      );
       await fetchDocuments();
-
-      setSelectedDocument(data.filename || file.name);
+      setSelectedDocument(res.filename);
     } catch (err) {
       console.error("Upload error:", err);
-      setError(err.message || "Unable to upload PDF.");
+      setError(err.message || "Unable to upload and index PDF.");
     } finally {
       setUploading(false);
       e.target.value = "";
     }
   };
 
-  // Ask Gemini using selected insurance document
+  // Ask policy assistant using selected insurance document
   const submit = async (e) => {
     e.preventDefault();
 
@@ -257,27 +209,11 @@ export default function Insurance() {
     setAnswer(null);
 
     try {
-      const response = await fetch(`${API_BASE_URL}/api/insurance/ask`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          question: text.trim(),
-          filename: selectedDocument,
-        }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.detail || "Unable to generate an answer.");
-      }
-
+      const data = await answerInsuranceQuestion(text.trim(), selectedDocument);
       setAnswer(data);
     } catch (err) {
       console.error("Insurance question error:", err);
-      setError(err.message || "Something went wrong.");
+      setError(err.message || "Unable to analyze policy coverage for this query.");
     } finally {
       setAsking(false);
     }
