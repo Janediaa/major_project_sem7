@@ -1,0 +1,1017 @@
+{
+  "results": [
+    {
+      "uin": "BAJHLIP21606V022021",
+      "name": "Arogya Sanjeevani Policy, Bajaj General Insurance",
+      "insurer": "Bajaj General Insurance Limited",
+      "category": "health-indemnity",
+      "line": "health",
+      "kind": "product",
+      "status": "active",
+      "analysis": "{\"state\": \"extracted\", \"analysed_at\": \"2026-10-19 16:10:17.703839+00\", \"note\": \"Every stated fact carries a verbatim policy para (field quote) found in the cited clause.\"}",
+      "url": "https://indiainsurances.com/policy/bajaj-general-insurance/arogya-sanjeevani-policy-bajaj-general-insurance-bajhlip21606v022021",
+      "api": null,
+      "summary": "Arogya Sanjeevani Policy from Bajaj General is a one-year hospitalisation indemnity cover with sum insured from Rs 1,00,000 to Rs 25,00,000 on an individual or floater basis. It carries a 5% co-pay on every claim, room rent capped at 2% of sum insured up to Rs 5,000 a day, a 36-month pre-existing disease wait and a 5% cumulative bonus per claim-free year up to 50%.",
+      "fetched_at": "2026-11-14T20:25:21.884428+00:00",
+      "filter_values": {
+        "sum_insured_options": [
+          "Rs 1,00,000 to Rs 25,00,000 in fixed steps"
+        ],
+        "copay": [
+          "5% on all claims"
+        ],
+        "deductible": [
+          "None"
+        ],
+        "initial_waiting": [
+          "30 days (accidents covered)"
+        ],
+        "ped_waiting": [
+          "36 months"
+        ]
+      }
+    },
+    {
+      "uin": "GODHLIP24179V022324",
+      "name": "Arogya Sanjeevani Policy, Go Digit",
+      "insurer": "Go Digit General Insurance Limited",
+      "category": "health-indemnity",
+      "line": "health",
+      "kind": "product",
+      "status": "active",
+      "analysis": "{\"state\": \"extracted\", \"analysed_at\": \"2026-10-16 06:29:30.80678+00\", \"note\": \"Every stated fact carries a verbatim policy para (field quote) found in the cited clause.\"}",
+      "url": "https://indiainsurances.com/policy/go-digit-general-insurance/arogya-sanjeevani-policy-go-digit-godhlip24179v022324",
+      "api": null,
+      "summary": "Arogya Sanjeevani Policy, Go Digit is a one-year indemnity health policy on an individual or family floater basis, with sum insured from Rs 50,000 to Rs 3 crore and treatment in India only. It has a 5% co-payment on every claim, room rent capped at 2% of sum insured up to Rs 5,000 per day, a 30-day initial wait, 36 months for pre-existing diseases and a 5% cumulative bonus per claim-free year up to 50%.",
+      "fetched_at": "2026-11-14T20:25:27.632009+00:00",
+      "filter_values": {
+        "sum_insured_options": [
+          "Rs 50,000 to Rs 3 crore, in multiples of Rs 50,000"
+        ],
+        "copay": [
+          "5% on every claim"
+        ],
+        "deductible": [
+          "None"
+        ],
+        "initial_waiting": [
+          "30 days"
+        ],
+        "ped_waiting": [
+          "36 months"
+        ]
+      }
+    },
+    {
+      "uin": "NBHHLIP27056V042627",
+      "name": "Arogya Sanjeevani, Niva Bupa Health Insurance",
+      "insurer": "Niva Bupa Health Insurance Co Ltd.",
+      "category": "health-indemnity",
+      "line": "health",
+      "kind": "product",
+      "status": "active",
+      "analysis": "{\"state\": \"extracted\", \"analysed_at\": \"2026-10-16 07:11:58.78223+00\", \"note\": \"Every stated fact carries a verbatim policy para (field quote) found in the cited clause.\"}",
+      "url": "https://indiainsurances.com/policy/niva-bupa-health-insurance/arogya-sanjeevani-niva-bupa-health-insurance-nbhhlip27056v042627",
+      "api": null,
+      "summary": "Arogya Sanjeevani is Niva Bupa's one-year hospitalisation indemnity policy for individuals or families, with sum insured from INR 50,000 to 10 lakh. Every claim carries a 5% co-payment, room rent is capped at 2% of sum insured up to Rs. 5,000 per day, and pre-existing diseases wait 36 months.",
+      "fetched_at": "2026-11-14T20:25:36.354433+00:00",
+      "filter_values": {
+        "sum_insured_options": [
+          "INR 50,000 to 10 Lacs (in multiples of INR 50,000)"
+        ],
+        "copay": [
+          "5% on every claim"
+        ],
+        "deductible": [
+          "None"
+        ],
+        "initial_waiting": [
+          "30 days"
+        ],
+        "ped_waiting": [
+          "36 months"
+        ]
+      }
+    },
+    {
+      "uin": "NBHHLIP26049V022526",
+      "name": "Aspire",
+      "insurer": "Niva Bupa Health Insurance Co Ltd.",
+      "category": "health-indemnity",
+      "line": "health",
+      "kind": "product",
+      "status": "active",
+      "analysis": "{\"state\": \"extracted\", \"analysed_at\": \"2026-10-16 07:11:57.528942+00\", \"note\": \"Every stated fact carries a verbatim policy para (field quote) found in the cited clause.\"}",
+      "url": "https://indiainsurances.com/policy/niva-bupa-health-insurance/aspire-nbhhlip26049v022526",
+      "api": null,
+      "summary": "Aspire is a Niva Bupa individual or family floater health indemnity policy with sum insured from Rs 3 lakh to Rs 1 crore, sold as Gold to Titanium, Gold+ to Titanium+ and Flexi variants for entry ages 0 days to 65 years. It has no room rent limit except in the Gold variant, 60 and 180 days of pre and post hospitalisation cover, unlimited ReAssure refills after the first paid claim, Booster+ carry-forward up to 10 times the Base Sum Insured and M-iracle maternity cover after 9 to 48 months by variant.",
+      "fetched_at": "2026-11-14T20:25:37.047041+00:00",
+      "filter_values": {
+        "sum_insured_options": [
+          "Rs 3 lakh to Rs 1 crore (3, 5, 7.5, 10, 15, 20, 25, 50, 100 lakh)"
+        ],
+        "copay": [
+          "None unless opted"
+        ],
+        "deductible": [
+          "None unless opted"
+        ],
+        "initial_waiting": [
+          "30 days"
+        ],
+        "ped_waiting": [
+          "36 months"
+        ]
+      }
+    },
+    {
+      "uin": "BAJHLIP21273V012021",
+      "name": "Criti Care",
+      "insurer": "Bajaj General Insurance Limited",
+      "category": "critical-illness",
+      "line": "health",
+      "kind": "product",
+      "status": "active",
+      "analysis": "{\"state\": \"extracted\", \"analysed_at\": \"2026-10-19 16:10:17.495086+00\", \"note\": \"Every stated fact carries a verbatim policy para (field quote) found in the cited clause.\"}",
+      "url": "https://indiainsurances.com/policy/bajaj-general-insurance/criti-care-bajhlip21273v012021",
+      "api": null,
+      "summary": "Criti Care is an individual critical illness policy from Bajaj General with five sections (Cancer, Cardiovascular, Kidney, Neuro, Transplants and Sensory Organs) covering 43 conditions, of which at least one section must be chosen. It pays a lump sum of 25% of the section Sum Assured for a Category A condition and 100% for a Category B condition, after a 180 or 120 day initial waiting period and a 0, 7 or 15 day survival period.",
+      "fetched_at": "2026-11-14T19:13:35.394368+00:00",
+      "filter_values": {
+        "sum_insured_options": [
+          "Rs 1 lac to Rs 50 lacs per section (total up to Rs 2 crores)"
+        ],
+        "copay": [],
+        "deductible": [],
+        "initial_waiting": [
+          "180 or 120 days, as shown in the policy schedule"
+        ],
+        "ped_waiting": [
+          "None"
+        ]
+      }
+    },
+    {
+      "uin": "GODHLIP25038V012425",
+      "name": "Digit Donor Shield Policy",
+      "insurer": "Go Digit General Insurance Limited",
+      "category": "health-indemnity",
+      "line": "health",
+      "kind": "product",
+      "status": "active",
+      "analysis": "{\"state\": \"extracted\", \"analysed_at\": \"2026-10-16 06:29:31.105284+00\", \"note\": \"Every stated fact carries a verbatim policy para (field quote) found in the cited clause.\"}",
+      "url": "https://indiainsurances.com/policy/go-digit-general-insurance/digit-donor-shield-policy-godhlip25038v012425",
+      "api": null,
+      "summary": "Digit Donor Shield Policy is an indemnity health policy that pays hospital costs in India for complications of a Surrogate Mother's surrogacy pregnancy and postpartum delivery, or of an Oocyte Donor's oocyte retrieval, with sum insured options from INR 2L to 1Cr. Room rent is limited to 1% and ICU to 2% of the sum insured per day, and pre-existing conditions, delivery expenses and newborn cover are excluded.",
+      "fetched_at": "2026-11-14T20:25:28.386585+00:00",
+      "filter_values": {
+        "sum_insured_options": [
+          "INR 2L, 3L, 4L, 5L, 10L, 15L, 20L, 25L, 50L, 1Cr"
+        ],
+        "copay": [
+          "None"
+        ],
+        "deductible": [
+          "None"
+        ],
+        "initial_waiting": [
+          "30 days"
+        ],
+        "ped_waiting": [
+          "None"
+        ]
+      }
+    },
+    {
+      "uin": "GODHLIP27048V052627",
+      "name": "Digit Health Care Plus Policy",
+      "insurer": "Go Digit General Insurance Limited",
+      "category": "health-indemnity",
+      "line": "health",
+      "kind": "product",
+      "status": "active",
+      "analysis": "{\"state\": \"extracted\", \"analysed_at\": \"2026-10-16 06:29:32.529534+00\", \"note\": \"Every stated fact carries a verbatim policy para (field quote) found in the cited clause.\"}",
+      "url": "https://indiainsurances.com/policy/go-digit-general-insurance/digit-health-care-plus-policy-godhlip27048v052627",
+      "api": null,
+      "summary": "Digit Health Care Plus Policy is a modular indemnity health policy from Go Digit General Insurance with 30 sections the buyer chooses, led by a Hospitalization Cover (accident and illness, or accident only) with sum insured from Rs. 10,000 to unlimited. Waiting periods, room rent limit, deductible and co-pay are chosen by the buyer, cover is India only unless extended for extra premium, and policy terms run 1 to 5 years.",
+      "fetched_at": "2026-11-14T20:25:28.933735+00:00",
+      "filter_values": {
+        "sum_insured_options": [
+          "Rs. 10,000 to Unlimited (above Rs. 3 crore)"
+        ],
+        "copay": [
+          "10% or 20% if treated in a higher-cost zone than chosen (not for accidents); otherwise none unless opted"
+        ],
+        "deductible": [
+          "None unless opted (Rs. 50,000 to 25 lakhs)"
+        ],
+        "initial_waiting": [
+          "30 days (can be reduced to none, 2, 7 or 15 days as opted)"
+        ],
+        "ped_waiting": [
+          "As opted: none, 3 months, 6 months, 1, 2 or 3 years"
+        ]
+      }
+    },
+    {
+      "uin": "GODHLIP25039V022425",
+      "name": "Digit Health Insurance Policy",
+      "insurer": "Go Digit General Insurance Limited",
+      "category": "health-indemnity",
+      "line": "health",
+      "kind": "product",
+      "status": "active",
+      "analysis": "{\"state\": \"extracted\", \"analysed_at\": \"2026-10-16 06:29:31.536148+00\", \"note\": \"Every stated fact carries a verbatim policy para (field quote) found in the cited clause.\"}",
+      "url": "https://indiainsurances.com/policy/go-digit-general-insurance/digit-health-insurance-policy-godhlip25039v022425",
+      "api": null,
+      "summary": "Digit Health Insurance Policy is an indemnity health policy from Go Digit General Insurance with eight plans (Double Wallet, Infinity Wallet, Carry Forward Sum Insured, Worldwide Treatment, Early Start, Senior Priority, Even Protect and the modular BharatX), sum insured from Rs. 2,00,000 to Rs. 3,00,00,000 and policy terms of 1 to 5 years. Most plans have no room rent limit, include a 100% sum insured back-up, in-built personal accident cover and 25 optional covers, while new age treatments are capped at 50% of sum insured.",
+      "fetched_at": "2026-11-14T20:25:29.446042+00:00",
+      "filter_values": {
+        "sum_insured_options": [
+          "Rs. 2,00,000 to Rs. 3,00,00,000"
+        ],
+        "copay": [
+          "None, except 10% zone co-pay in some cases"
+        ],
+        "deductible": [
+          "None unless opted (2500 to 50,000 per claim)"
+        ],
+        "initial_waiting": [
+          "30 days (7 days in some plans)"
+        ],
+        "ped_waiting": [
+          "3 years"
+        ]
+      }
+    },
+    {
+      "uin": "GODHLIP25032V012425",
+      "name": "Digit Life Healthy Glow Policy",
+      "insurer": "Go Digit General Insurance Limited",
+      "category": "health-indemnity",
+      "line": "health",
+      "kind": "product",
+      "status": "active",
+      "analysis": "{\"state\": \"extracted\", \"analysed_at\": \"2026-10-16 06:29:32.155879+00\", \"note\": \"Every stated fact carries a verbatim policy para (field quote) found in the cited clause.\"}",
+      "url": "https://indiainsurances.com/policy/go-digit-general-insurance/digit-life-healthy-glow-policy-godhlip25032v012425",
+      "api": null,
+      "summary": "Digit Life Healthy Glow Policy is a combi product that bundles the Digit Health Insurance Policy (indemnity health cover from Go Digit General Insurance, eight plans, sum insured Rs 2,00,000 to Rs 3,00,00,000) with Digit Glow Term Life Insurance from Go Digit Life Insurance. The health cover has no room rent limit except in the Even Protect Plan, a 100% sum insured back-up, waiting periods of 7 or 30 days, 2 years for listed illnesses and 3 years for pre-existing diseases (1 year each in the Early Start Plan), and 25 optional covers.",
+      "fetched_at": "2026-11-14T20:25:29.999097+00:00",
+      "filter_values": {
+        "sum_insured_options": [
+          "Rs 2,00,000 to Rs 3,00,00,000"
+        ],
+        "copay": [
+          "None; 10% zone co-pay if treated in a higher zone without address proof"
+        ],
+        "deductible": [
+          "None unless opted (Rs 2,500 to 50,000)"
+        ],
+        "initial_waiting": [
+          "30 days (7 days in some plans)"
+        ],
+        "ped_waiting": [
+          "3 years"
+        ]
+      }
+    },
+    {
+      "uin": "HDFHLIP26054V102526",
+      "name": "Easy Health",
+      "insurer": "HDFC ERGO General Insurance Company Limited",
+      "category": "health-indemnity",
+      "line": "health",
+      "kind": "product",
+      "status": "active",
+      "analysis": "{\"state\": \"extracted\", \"analysed_at\": \"2026-10-16 07:11:54.354343+00\", \"note\": \"Every stated fact carries a verbatim policy para (field quote) found in the cited clause.\"}",
+      "url": "https://indiainsurances.com/policy/hdfc-ergo-general-insurance/easy-health-hdfhlip26054v102526",
+      "api": null,
+      "summary": "Easy Health is an HDFC ERGO indemnity health policy sold in Standard and Exclusive plans, on an individual or family floater basis, with sum insured from Rs. 1 lakh to Rs. 50 lakh and cover in India only. It has a 30-day initial wait, 24 months for listed illnesses, 36 months for pre-existing diseases, and a 10% yearly cumulative bonus up to 100% irrespective of claims.",
+      "fetched_at": "2026-11-14T20:25:31.012663+00:00",
+      "filter_values": {
+        "sum_insured_options": [
+          "Rs. 1 lakh to Rs. 50 lakh (Standard up to 15 lakh; Exclusive 3 to 50 lakh)"
+        ],
+        "copay": [
+          "No zone co-payment for treatment in a higher tier city"
+        ],
+        "deductible": [
+          "None"
+        ],
+        "initial_waiting": [
+          "30 days"
+        ],
+        "ped_waiting": [
+          "36 months"
+        ]
+      }
+    },
+    {
+      "uin": "BAJHLIP23209V022223",
+      "name": "Global Health Care",
+      "insurer": "Bajaj General Insurance Limited",
+      "category": "health-indemnity",
+      "line": "health",
+      "kind": "product",
+      "status": "active",
+      "analysis": "{\"state\": \"extracted\", \"analysed_at\": \"2026-10-19 16:10:18.362961+00\", \"note\": \"Every stated fact carries a verbatim policy para (field quote) found in the cited clause.\"}",
+      "url": "https://indiainsurances.com/policy/bajaj-general-insurance/global-health-care-bajhlip23209v022223",
+      "api": null,
+      "summary": "Global Health Care is a one-year individual health indemnity policy from Bajaj General with two plans, Imperial and Imperial Plus, each pairing hospital cover in India in rupees (INR 3,750,000 to 37,500,000) with cover worldwide outside India in US dollars (USD 100,000 to 1,000,000), with or without the USA. In India room rent and ICU are paid at actual with 60 days pre- and 180 days post-hospitalisation, while abroad a single private room applies and only Imperial Plus adds out-patient, evacuation and repatriation benefits.",
+      "fetched_at": "2026-11-14T20:25:22.316982+00:00",
+      "filter_values": {
+        "sum_insured_options": [
+          "Imperial: INR 3,750,000 to 7,500,000 plus USD 100,000 to 200,000; Imperial Plus: INR 11,200,000 to 37,500,000 plus USD 300,000 to 1,000,000"
+        ],
+        "copay": [
+          "None on hospital claims; 20% on optional dental; 80% paid abroad without pre-approval"
+        ],
+        "deductible": [
+          "None unless opted"
+        ],
+        "initial_waiting": [
+          "30 days"
+        ],
+        "ped_waiting": [
+          "36 months"
+        ]
+      }
+    },
+    {
+      "uin": "NBHHLIP26046V032526",
+      "name": "GoActive",
+      "insurer": "Niva Bupa Health Insurance Co Ltd.",
+      "category": "health-indemnity",
+      "line": "health",
+      "kind": "product",
+      "status": "active",
+      "analysis": "{\"state\": \"extracted\", \"analysed_at\": \"2026-10-16 07:11:57.257325+00\", \"note\": \"Every stated fact carries a verbatim policy para (field quote) found in the cited clause.\"}",
+      "url": "https://indiainsurances.com/policy/niva-bupa-health-insurance/goactive-nbhhlip26046v032526",
+      "api": null,
+      "summary": "GoActive is a one-year Niva Bupa health indemnity policy for individuals or families, with Base Sum Insured from Rs. 1 lac to 25 lacs, cover in India only, and a Re-fill of up to 100% of Base Sum Insured. It adds OPD consultations, an annual health check-up and telephonic counseling for Sum Insured 3 Lacs and above, with optional I-Protect, Health Coach and Personal Accident covers.",
+      "fetched_at": "2026-11-14T20:25:37.798423+00:00",
+      "filter_values": {
+        "sum_insured_options": [
+          "Rs. 1 lac to 25 lacs (1, 2, 3, 4, 5, 7.5, 10, 15, 25 lacs)"
+        ],
+        "copay": [
+          "None in Zone 1; 20% in Mumbai, Delhi NCR, Kolkata & Gujarat State under Zone 2"
+        ],
+        "deductible": [
+          "None unless opted"
+        ],
+        "initial_waiting": [
+          "30 days"
+        ],
+        "ped_waiting": [
+          "36 months"
+        ]
+      }
+    },
+    {
+      "uin": "BAJHLIP23210V042223",
+      "name": "Health Care Supreme",
+      "insurer": "Bajaj General Insurance Limited",
+      "category": "health-indemnity",
+      "line": "health",
+      "kind": "product",
+      "status": "active",
+      "analysis": "{\"state\": \"extracted\", \"analysed_at\": \"2026-10-19 16:10:18.588782+00\", \"note\": \"Every stated fact carries a verbatim policy para (field quote) found in the cited clause.\"}",
+      "url": "https://indiainsurances.com/policy/bajaj-general-insurance/health-care-supreme-bajhlip23210v042223",
+      "api": null,
+      "summary": "Health Care Supreme is a Bajaj General indemnity health policy sold as Vital, Smart and Ultimo plans (Plans A to K) with hospitalisation sums insured of Rs 500,000 to Rs 5,000,000, on an individual or floater basis for 1, 2 or 3 years. It includes OPD, maternity after 24 months, 100% sum insured reinstatement once a year and a 10% a year cumulative bonus up to 50%, with a 24 month pre-existing disease wait and no co-payment or sub-limits.",
+      "fetched_at": "2026-11-14T20:25:22.902737+00:00",
+      "filter_values": {
+        "sum_insured_options": [
+          "Rs 500,000 to Rs 5,000,000 hospitalisation sum insured (Plans A to K)"
+        ],
+        "copay": [
+          "None"
+        ],
+        "deductible": [
+          "None"
+        ],
+        "initial_waiting": [
+          "30 days"
+        ],
+        "ped_waiting": [
+          "24 months"
+        ]
+      }
+    },
+    {
+      "uin": "NBHHLIP26051V092526",
+      "name": "Health Companion",
+      "insurer": "Niva Bupa Health Insurance Co Ltd.",
+      "category": "health-indemnity",
+      "line": "health",
+      "kind": "product",
+      "status": "active",
+      "analysis": "{\"state\": \"extracted\", \"analysed_at\": \"2026-10-16 07:11:58.044034+00\", \"note\": \"Every stated fact carries a verbatim policy para (field quote) found in the cited clause.\"}",
+      "url": "https://indiainsurances.com/policy/niva-bupa-health-insurance/health-companion-nbhhlip26051v092526",
+      "api": null,
+      "summary": "Health Companion is a Niva Bupa indemnity health policy for individuals or families, sold as Variant 2022 (no room cap) and Variant 2023 (Shared Room cap with 20% co-payment for a higher room), with sum insured from Rs. 3 lac to 1 crore and cover in India only. It pays 60 days pre and 180 days post hospitalisation, adds a full Refill of the base sum insured once a year, and a No Claim Bonus of 20% a year up to 100%.",
+      "fetched_at": "2026-11-14T20:25:38.505892+00:00",
+      "filter_values": {
+        "sum_insured_options": [
+          "Rs. 3 lac to Rs. 1 crore"
+        ],
+        "copay": [
+          "20% in Variant 2023 for a room above Shared Room"
+        ],
+        "deductible": [
+          "None unless opted"
+        ],
+        "initial_waiting": [
+          "30 days"
+        ],
+        "ped_waiting": [
+          "36 months"
+        ]
+      }
+    },
+    {
+      "uin": "BAJHLIP24149V062324",
+      "name": "Health Ensure",
+      "insurer": "Bajaj General Insurance Limited",
+      "category": "health-indemnity",
+      "line": "health",
+      "kind": "product",
+      "status": "active",
+      "analysis": "{\"state\": \"extracted\", \"analysed_at\": \"2026-10-19 16:10:19.049245+00\", \"note\": \"Every stated fact carries a verbatim policy para (field quote) found in the cited clause.\"}",
+      "url": "https://indiainsurances.com/policy/bajaj-general-insurance/health-ensure-bajhlip24149v062324",
+      "api": null,
+      "summary": "Health Ensure is a Bajaj General hospitalisation indemnity policy on an individual or family floater basis, for 1, 2 or 3 years, with sum insured up to Rs. 10 lakh and room rent capped at 1% of sum insured up to INR 5,000 per day. Pre-existing diseases wait 24 months, claims are handled in-house without a TPA, and Zone B premium payers treated in a Zone A city pay a 20% co-payment.",
+      "fetched_at": "2026-11-14T20:25:23.581725+00:00",
+      "filter_values": {
+        "sum_insured_options": [
+          "Rs. 50,000 to Rs. 10 lakh individual, Rs. 2 lakh to Rs. 10 lakh floater; new policies from Rs. 3 lakh"
+        ],
+        "copay": [
+          "20% if you pay Zone B premium and are treated in a Zone A city; otherwise none unless opted"
+        ],
+        "deductible": [
+          "None"
+        ],
+        "initial_waiting": [
+          "30 days"
+        ],
+        "ped_waiting": [
+          "24 months"
+        ]
+      }
+    },
+    {
+      "uin": "BAJHLIP26073V082526",
+      "name": "Health Guard",
+      "insurer": "Bajaj General Insurance Limited",
+      "category": "health-indemnity",
+      "line": "health",
+      "kind": "product",
+      "status": "active",
+      "analysis": "{\"state\": \"extracted\", \"analysed_at\": \"2026-10-16 04:48:11.690312+00\", \"note\": \"Every stated fact carries a verbatim policy para (field quote) found in the cited clause.\"}",
+      "url": "https://indiainsurances.com/policy/bajaj-general-insurance/health-guard-bajhlip26073v082526",
+      "api": null,
+      "summary": "Health Guard is a Bajaj General indemnity health policy sold as Individual or Family Floater in Silver, Gold and Platinum plans, for 1, 2 or 3 years, covering treatment within India only. It pays pre-hospitalisation for 60 days and post-hospitalisation for 90 days, has a 30-day initial waiting period, a 36-month pre-existing disease waiting period and a 24-month specific illness waiting period, and offers maternity cover only in Gold and Platinum after 72 months.",
+      "fetched_at": "2026-11-14T20:25:24.073225+00:00",
+      "filter_values": {
+        "sum_insured_options": [
+          "3 lacs to 1 Crore"
+        ],
+        "copay": [
+          "None for Zone A premium; zone co-pay 15%, 20% or 5% when treated in a higher zone (not for accidents)"
+        ],
+        "deductible": [
+          "None unless opted"
+        ],
+        "initial_waiting": [
+          "30 days"
+        ],
+        "ped_waiting": [
+          "36 months"
+        ]
+      }
+    },
+    {
+      "uin": "NBHHLIP27055V052627",
+      "name": "Health Pulse",
+      "insurer": "Niva Bupa Health Insurance Co Ltd.",
+      "category": "health-indemnity",
+      "line": "health",
+      "kind": "product",
+      "status": "active",
+      "analysis": "{\"state\": \"extracted\", \"analysed_at\": \"2026-10-16 07:11:58.55705+00\", \"note\": \"Every stated fact carries a verbatim policy para (field quote) found in the cited clause.\"}",
+      "url": "https://indiainsurances.com/policy/niva-bupa-health-insurance/health-pulse-nbhhlip27055v052627",
+      "api": null,
+      "summary": "Niva Bupa Health Pulse is an individual or family floater indemnity health policy with a Classic plan (20% co-payment for treatment in Delhi NCR, Mumbai, Kolkata and Gujarat) and an Enhanced plan (no co-payment), for Base Sum Insured of Rs 3 lakh to 25 lakh. It adds Loyalty Additions of 10% a year up to 100%, a Re-fill of up to 100% of Base Sum Insured, and has 30-day, 24-month and 36-month waiting periods.",
+      "fetched_at": "2026-11-14T20:25:39.097661+00:00",
+      "filter_values": {
+        "sum_insured_options": [
+          "Rs 3 lakh to 25 lakh (3L/4L/5L/7.5L/10L/15L/20L/25L)"
+        ],
+        "copay": [
+          "20% in Delhi NCR, Mumbai, Kolkata and Gujarat (Classic plan); none (Enhanced plan)"
+        ],
+        "deductible": [
+          "None"
+        ],
+        "initial_waiting": [
+          "30 days"
+        ],
+        "ped_waiting": [
+          "36 months"
+        ]
+      }
+    },
+    {
+      "uin": "NBHHLIP24135V012324",
+      "name": "Health+",
+      "insurer": "Niva Bupa Health Insurance Co Ltd.",
+      "category": "health-indemnity",
+      "line": "health",
+      "kind": "product",
+      "status": "active",
+      "analysis": "{\"state\": \"extracted\", \"analysed_at\": \"2026-10-16 07:11:56.782571+00\", \"note\": \"Every stated fact carries a verbatim policy para (field quote) found in the cited clause.\"}",
+      "url": "https://indiainsurances.com/policy/niva-bupa-health-insurance/health-nbhhlip24135v012324",
+      "api": null,
+      "summary": "Health+ is an individual indemnity health policy from Niva Bupa covering hospitalisation in India only, with sum insured from Rs 1 lakh to Rs 30 lakh for entry ages 18 to 65. Every claim carries a 20% co-payment, room rent is capped at 2% of base sum insured per day, and listed procedures have fixed rupee sub-limits.",
+      "fetched_at": "2026-11-14T20:25:39.768859+00:00",
+      "filter_values": {
+        "sum_insured_options": [
+          "INR 1 lakh to 30 lakh (1, 2, 5, 7, 10, 15, 20, 25, 30 lakh)"
+        ],
+        "copay": [
+          "20% on every claim"
+        ],
+        "deductible": [
+          "None"
+        ],
+        "initial_waiting": [
+          "30 days"
+        ],
+        "ped_waiting": [
+          "36 months"
+        ]
+      }
+    },
+    {
+      "uin": "MCIHLIP21559V012021",
+      "name": "Lifetime Health",
+      "insurer": "Manipal Cigna Health Insurance Company Limited",
+      "category": "health-indemnity",
+      "line": "health",
+      "kind": "product",
+      "status": "active",
+      "analysis": "{\"state\": \"extracted\", \"analysed_at\": \"2026-10-19 17:10:39.342159+00\", \"note\": \"Every stated fact carries a verbatim policy para (field quote) found in the cited clause.\"}",
+      "url": "https://indiainsurances.com/policy/manipal-cigna-health-insurance/lifetime-health-mcihlip21559v012021",
+      "api": null,
+      "summary": "ManipalCigna Lifetime Health India Plan is an indemnity health policy covering treatment in India only, with Sum Insured1 of Rs 50 Lacs to 300 Lacs, individual or family floater, for 1, 2 or 3 years and renewable for life. Pre-existing diseases and listed illnesses wait 24 months, the used Base Sum Insured1 is restored unlimited times a year, there is no standard co-payment or disease sub-limit, and maternity and OPD are excluded in the base cover.",
+      "fetched_at": "2026-11-14T20:25:32.749918+00:00",
+      "filter_values": {
+        "sum_insured_options": [
+          "Rs 50 Lacs / 75 Lacs / 100 Lacs / 150 Lacs / 200 Lacs / 300 Lacs"
+        ],
+        "copay": [
+          "None as standard (10% or 20% may apply for late intimation)"
+        ],
+        "deductible": [
+          "None unless opted"
+        ],
+        "initial_waiting": [
+          "30 days"
+        ],
+        "ped_waiting": [
+          "24 months"
+        ]
+      }
+    },
+    {
+      "uin": "MCIHLIP27044V012627",
+      "name": "ManipalCigna Infinix",
+      "insurer": "Manipal Cigna Health Insurance Company Limited",
+      "category": "health-indemnity",
+      "line": "health",
+      "kind": "product",
+      "status": "active",
+      "analysis": "{\"state\": \"extracted\", \"analysed_at\": \"2026-10-19 17:10:39.664548+00\", \"note\": \"Every stated fact carries a verbatim policy para (field quote) found in the cited clause.\"}",
+      "url": "https://indiainsurances.com/policy/manipal-cigna-health-insurance/manipalcigna-infinix-mcihlip27044v012627",
+      "api": null,
+      "summary": "ManipalCigna Infinix is an India-only individual or family floater health indemnity policy with Core, Now and Active variants, covering hospital stays of 2 hours or more, with a Rs 10 lakh or Unlimited Base Sum Insured outside the Active variant and lifelong renewal. A co-payment of 10% or 25% applies outside the chosen hospital package, the default room is a single private AC room, and the Core plan waiting periods are 30 days, 36 months for pre-existing diseases and 36 months for specified diseases.",
+      "fetched_at": "2026-11-14T20:25:33.479689+00:00",
+      "filter_values": {
+        "sum_insured_options": [
+          "Rs 10L or Unlimited (Active variant: below 7.5L to above 25L)"
+        ],
+        "copay": [
+          "0% within your chosen hospital package; 10% or 25% outside it"
+        ],
+        "deductible": [
+          "None unless opted"
+        ],
+        "initial_waiting": [
+          "30 days"
+        ],
+        "ped_waiting": [
+          "36 months"
+        ]
+      }
+    },
+    {
+      "uin": "MCIHLIP26038V022526",
+      "name": "ManipalCigna Sarvah",
+      "insurer": "Manipal Cigna Health Insurance Company Limited",
+      "category": "health-indemnity",
+      "line": "health",
+      "kind": "product",
+      "status": "active",
+      "analysis": "{\"state\": \"extracted\", \"analysed_at\": \"2026-10-19 17:10:39.010934+00\", \"note\": \"Every stated fact carries a verbatim policy para (field quote) found in the cited clause.\"}",
+      "url": "https://indiainsurances.com/policy/manipal-cigna-health-insurance/manipalcigna-sarvah-mcihlip26038v022526",
+      "api": null,
+      "summary": "ManipalCigna Sarvah Uttam is an individual or family floater health indemnity policy, India only, with Base Sum Insured from \u20b95 Lacs to \u20b9300 Lacs, rooms up to a Single Private AC Room and 90 days pre and 180 days post hospitalisation cover. Waiting periods are 30 days initial, 24 months for listed illnesses and 36 months for pre-existing diseases, while restoration, the Gullak bonus, maternity, health check-ups and personal accident cover are optional covers.",
+      "fetched_at": "2026-11-14T20:25:34.020160+00:00",
+      "filter_values": {
+        "sum_insured_options": [
+          "\u20b95 Lacs to \u20b9300 Lacs"
+        ],
+        "copay": [
+          "None unless opted (voluntary 10%, 20% or 30%)"
+        ],
+        "deductible": [
+          "None unless opted (aggregate \u20b910K to \u20b910L, or \u20b91K to \u20b95K per day)"
+        ],
+        "initial_waiting": [
+          "30 days"
+        ],
+        "ped_waiting": [
+          "36 months"
+        ]
+      }
+    },
+    {
+      "uin": "BAJHLIP27081V012627",
+      "name": "My Family Complete",
+      "insurer": "Bajaj General Insurance Limited",
+      "category": "health-indemnity",
+      "line": "health",
+      "kind": "product",
+      "status": "active",
+      "analysis": "{\"state\": \"extracted\", \"analysed_at\": \"2026-10-19 16:10:20.42365+00\", \"note\": \"Every stated fact carries a verbatim policy para (field quote) found in the cited clause.\"}",
+      "url": "https://indiainsurances.com/policy/bajaj-general-insurance/my-family-complete-bajhlip27081v012627",
+      "api": null,
+      "summary": "My Family Complete is a Bajaj General indemnity health policy that covers family members and pet dogs or cats under one contract, on an individual or floater basis, with sums insured from Rs 5 lakh to Rs 5 crore and terms of 1 to 5 years. It pays hospitalisation in a single private AC room with 60 days pre and 90 days post hospitalisation, a 25% cumulative bonus up to 100% and sum insured reinstatement, after waiting periods of 30 days, 24 months for listed conditions and 36 months for pre-existing diseases.",
+      "fetched_at": "2026-11-14T20:25:24.626092+00:00",
+      "filter_values": {
+        "sum_insured_options": [
+          "Rs 5 lakh to Rs 5 crore (5, 7.5, 10, 15, 20, 25, 50, 75 lakh; 1, 2, 3, 4, 5 crore)"
+        ],
+        "copay": [
+          "None unless opted"
+        ],
+        "deductible": [
+          "None unless opted"
+        ],
+        "initial_waiting": [
+          "30 days"
+        ],
+        "ped_waiting": [
+          "36 months (or the period opted, shown in the schedule)"
+        ]
+      }
+    },
+    {
+      "uin": "BAJHLIP26074V022526",
+      "name": "My Health Care Plan",
+      "insurer": "Bajaj General Insurance Limited",
+      "category": "health-indemnity",
+      "line": "health",
+      "kind": "product",
+      "status": "active",
+      "analysis": "{\"state\": \"extracted\", \"analysed_at\": \"2026-10-19 16:10:19.627333+00\", \"note\": \"Every stated fact carries a verbatim policy para (field quote) found in the cited clause.\"}",
+      "url": "https://indiainsurances.com/policy/bajaj-general-insurance/my-health-care-plan-bajhlip26074v022526",
+      "api": null,
+      "summary": "My Health Care Plan 1 is a Bajaj General indemnity health policy, individual or family floater, with sum insured from Rs 3 lakh to Rs 5 crore, a single private AC room up to Rs 10 lakh SI, and 60 and 90 days pre and post hospitalisation. It has 30-day, 24-month and 36-month waiting periods, maternity for SI 5 lakh and above, a separate Baby Care sum insured, an OPD sum insured of 2X the net premium and unlimited reinstatement for SI 5 lakh and above.",
+      "fetched_at": "2026-11-14T20:25:25.367831+00:00",
+      "filter_values": {
+        "sum_insured_options": [
+          "3 lakh to 5 crore (3/4/5/7.5/10/15/20/25/30/35/40/45/50/75 lakh and 1/2/3/4/5 crore)"
+        ],
+        "copay": [
+          "None unless the voluntary co-payment (5%, 10%, 15% or 20%) is opted"
+        ],
+        "deductible": [
+          "None (NA)"
+        ],
+        "initial_waiting": [
+          "30 days"
+        ],
+        "ped_waiting": [
+          "36 months"
+        ]
+      }
+    },
+    {
+      "uin": "BAJHLIP27079V012627",
+      "name": "My Health Companion",
+      "insurer": "Bajaj General Insurance Limited",
+      "category": "health-indemnity",
+      "line": "health",
+      "kind": "product",
+      "status": "active",
+      "analysis": "{\"state\": \"extracted\", \"analysed_at\": \"2026-10-19 16:10:19.912291+00\", \"note\": \"Every stated fact carries a verbatim policy para (field quote) found in the cited clause.\"}",
+      "url": "https://indiainsurances.com/policy/bajaj-general-insurance/my-health-companion-bajhlip27079v012627",
+      "api": null,
+      "summary": "My Health Companion is an outpatient-only indemnity policy from Bajaj General with four plans, Start, Smart, Prime and Elite, carrying OPD wallets of Rs 5,000, 10,000, 15,000 and 25,000 for in-clinic consultations, prescribed diagnostics, tele consultations, accidental OPD, an annual health check-up and diet and emotional wellness sessions (dental OPD in Elite only). Hospitalisation, room rent and day care are excluded, treatment must be taken in India, and illness claims carry a 30-day initial waiting period and a 12-month pre-existing disease wait.",
+      "fetched_at": "2026-11-14T20:25:25.892287+00:00",
+      "filter_values": {
+        "sum_insured_options": [
+          "OPD wallet of \u20b95,000, \u20b910,000, \u20b915,000 or \u20b925,000 by plan"
+        ],
+        "copay": [
+          "None"
+        ],
+        "deductible": [
+          "None"
+        ],
+        "initial_waiting": [
+          "30 days"
+        ],
+        "ped_waiting": [
+          "12 months"
+        ]
+      }
+    },
+    {
+      "uin": "BAJHLIP27082V012627",
+      "name": "My Infinite Care",
+      "insurer": "Bajaj General Insurance Limited",
+      "category": "health-indemnity",
+      "line": "health",
+      "kind": "product",
+      "status": "active",
+      "analysis": "{\"state\": \"extracted\", \"analysed_at\": \"2026-10-19 16:10:20.684941+00\", \"note\": \"Every stated fact carries a verbatim policy para (field quote) found in the cited clause.\"}",
+      "url": "https://indiainsurances.com/policy/bajaj-general-insurance/my-infinite-care-bajhlip27082v012627",
+      "api": null,
+      "summary": "My Infinite Care is a Bajaj General individual or family floater health indemnity policy with a Sum Insured of 5 lakh, 10 lakh or Unlimited, for 1 to 5 years, with entry from 3 months and lifetime renewal. It pays a single private AC room, ICU at actuals, 90 days pre and 180 days post hospitalisation, unlimited Sum Insured reinstatement and a 50% a year cumulative bonus up to 100% irrespective of claims, with 30-day, 24-month specific and 36-month pre-existing disease waiting periods.",
+      "fetched_at": "2026-11-14T20:25:26.502680+00:00",
+      "filter_values": {
+        "sum_insured_options": [
+          "Rs 5 lakh, Rs 10 lakh or Unlimited"
+        ],
+        "copay": [
+          "None unless opted"
+        ],
+        "deductible": [
+          "None unless opted"
+        ],
+        "initial_waiting": [
+          "30 days"
+        ],
+        "ped_waiting": [
+          "36 months"
+        ]
+      }
+    },
+    {
+      "uin": "BAJHLIP27080V012627",
+      "name": "My Swasthya Care",
+      "insurer": "Bajaj General Insurance Limited",
+      "category": "health-indemnity",
+      "line": "health",
+      "kind": "product",
+      "status": "active",
+      "analysis": "{\"state\": \"extracted\", \"analysed_at\": \"2026-10-19 16:10:20.171244+00\", \"note\": \"Every stated fact carries a verbatim policy para (field quote) found in the cited clause.\"}",
+      "url": "https://indiainsurances.com/policy/bajaj-general-insurance/my-swasthya-care-bajhlip27080v012627",
+      "api": null,
+      "summary": "My Swasthya Care is a 1 year individual wellness policy from Bajaj General for ages 18 to 65 that arranges services on a cashless basis only through the Service Provider's app and pays no hospital bills. Each Policy Year it gives 1 Annual Health Check-up, 1 specialist and 3 GP tele consultations, any 2 lab test profiles, 6 diet consultations and 4 face scans, with no waiting period for pre-existing disease, within India only.",
+      "fetched_at": "2026-11-14T20:25:27.063728+00:00",
+      "filter_values": {
+        "sum_insured_options": [
+          "None"
+        ],
+        "copay": [
+          "None"
+        ],
+        "deductible": [
+          "None"
+        ],
+        "initial_waiting": [
+          "None"
+        ],
+        "ped_waiting": [
+          "None"
+        ]
+      }
+    },
+    {
+      "uin": "HDFHLIP26055V102526",
+      "name": "Optima Restore",
+      "insurer": "HDFC ERGO General Insurance Company Limited",
+      "category": "health-indemnity",
+      "line": "health",
+      "kind": "product",
+      "status": "active",
+      "analysis": "{\"state\": \"extracted\", \"analysed_at\": \"2026-10-16 07:11:54.587735+00\", \"note\": \"Every stated fact carries a verbatim policy para (field quote) found in the cited clause.\"}",
+      "url": "https://indiainsurances.com/policy/hdfc-ergo-general-insurance/optima-restore-hdfhlip26055v102526",
+      "api": null,
+      "summary": "Optima Restore from HDFC ERGO is an indemnity health policy for individuals or families, with basic sum insured from Rs 3 lakh to Rs 100 lakh and cover in India only. It restores 100% of the basic sum insured once a year and adds a multiplier of 50% of the base sum insured at each renewal irrespective of claims, up to 100%.",
+      "fetched_at": "2026-11-14T20:25:31.498225+00:00",
+      "filter_values": {
+        "sum_insured_options": [
+          "Rs 3, 5, 10, 15, 20, 25, 50 or 100 lakh"
+        ],
+        "copay": [
+          "None unless opted"
+        ],
+        "deductible": [
+          "None unless opted"
+        ],
+        "initial_waiting": [
+          "30 days"
+        ],
+        "ped_waiting": [
+          "36 months"
+        ]
+      }
+    },
+    {
+      "uin": "MCIHLIP27045V032627",
+      "name": "ProHealth Prime Insurance",
+      "insurer": "Manipal Cigna Health Insurance Company Limited",
+      "category": "health-indemnity",
+      "line": "health",
+      "kind": "product",
+      "status": "active",
+      "analysis": "{\"state\": \"extracted\", \"analysed_at\": \"2026-10-19 17:10:40.06595+00\", \"note\": \"Every stated fact carries a verbatim policy para (field quote) found in the cited clause.\"}",
+      "url": "https://indiainsurances.com/policy/manipal-cigna-health-insurance/prohealth-prime-insurance-mcihlip27045v032627",
+      "api": null,
+      "summary": "ManipalCigna ProHealth Prime (Protect and Advantage plans) is a one-year indemnity health policy with Base Sum Insured from Rs 3 Lacs (Protect) or Rs 5 Lacs (Advantage) to Rs 100 Lacs, room up to a Single Private AC Room, 60 and 180 days pre and post hospitalisation, and 100% restoration of the Base Sum Insured unlimited times a year. Pre-existing diseases wait 36 months (24 months from Rs 7.5 Lacs), listed conditions 24 months, the cumulative bonus is 25% a year up to 200% irrespective of claims, and treatment in a higher zone than the one paid for carries a 10% or 20% co-pay.",
+      "fetched_at": "2026-11-14T20:25:34.697033+00:00",
+      "filter_values": {
+        "sum_insured_options": [
+          "Protect: Rs 3 Lacs to Rs 100 Lacs; Advantage: Rs 5 Lacs to Rs 100 Lacs"
+        ],
+        "copay": [
+          "None in your own zone; 10% or 20% if treated in a higher zone"
+        ],
+        "deductible": [
+          "None unless opted"
+        ],
+        "initial_waiting": [
+          "30 days"
+        ],
+        "ped_waiting": [
+          "36 months for Sum Insured up to Rs 5 Lacs; 24 months for Rs 7.5 Lacs and above"
+        ]
+      }
+    },
+    {
+      "uin": "MCIHLIP27046V062627",
+      "name": "ProHealth Select",
+      "insurer": "Manipal Cigna Health Insurance Company Limited",
+      "category": "health-indemnity",
+      "line": "health",
+      "kind": "product",
+      "status": "active",
+      "analysis": "{\"state\": \"extracted\", \"analysed_at\": \"2026-10-19 17:10:40.392981+00\", \"note\": \"Every stated fact carries a verbatim policy para (field quote) found in the cited clause.\"}",
+      "url": "https://indiainsurances.com/policy/manipal-cigna-health-insurance/prohealth-select-mcihlip27046v062627",
+      "api": null,
+      "summary": "ManipalCigna ProHealth Select is an indemnity health policy in two variants, (A) for affinity partners with sum insured from Rs 0.5 lakh and (B) for agency, broking and direct channels from Rs 2 lakh, up to Rs 25 lakh, for individuals or families. Room rent is capped at 2% of base sum insured up to Rs 3,000, pre-existing diseases wait 36 months, listed illnesses 24 months, and a 5% yearly cumulative bonus up to 100% is given regardless of claims.",
+      "fetched_at": "2026-11-14T20:25:35.210048+00:00",
+      "filter_values": {
+        "sum_insured_options": [
+          "0.5 to 25 lakh (A); 2 to 25 lakh (B)"
+        ],
+        "copay": [
+          "None by default; 10% or 20% if treated in a costlier zone than the premium zone"
+        ],
+        "deductible": [
+          "None unless opted"
+        ],
+        "initial_waiting": [
+          "30 days"
+        ],
+        "ped_waiting": [
+          "36 months"
+        ]
+      }
+    },
+    {
+      "uin": "MCIHLIP23194V012223",
+      "name": "SecureHealth Policy",
+      "insurer": "Manipal Cigna Health Insurance Company Limited",
+      "category": "health-indemnity",
+      "line": "health",
+      "kind": "product",
+      "status": "active",
+      "analysis": "{\"state\": \"extracted\", \"analysed_at\": \"2026-10-19 17:10:38.354197+00\", \"note\": \"Every stated fact carries a verbatim policy para (field quote) found in the cited clause.\"}",
+      "url": "https://indiainsurances.com/policy/manipal-cigna-health-insurance/securehealth-policy-mcihlip23194v012223",
+      "api": null,
+      "summary": "SecureHealth is a one-year individual hospitalisation indemnity policy designed for persons with disability and carrying an HIV/AIDS cover, for adults 18 to 65 and children from 0 days to 17 years, with a sum insured of Rs 4 lacs or Rs 5 lacs. Every claim carries a 20% co-payment, room rent is capped at 1% of the sum insured per day, and pre-existing diseases wait 36 months (24 months for the pre-existing disability).",
+      "fetched_at": "2026-11-14T20:25:35.828866+00:00",
+      "filter_values": {
+        "sum_insured_options": [
+          "Rs 4 lacs and Rs 5 lacs"
+        ],
+        "copay": [
+          "20% on every claim"
+        ],
+        "deductible": [
+          "None"
+        ],
+        "initial_waiting": [
+          "30 days"
+        ],
+        "ped_waiting": [
+          "36 months (24 months for pre-existing disability)"
+        ]
+      }
+    },
+    {
+      "uin": "HDFHLIP26058V082526",
+      "name": "my:Optima Secure",
+      "insurer": "HDFC ERGO General Insurance Company Limited",
+      "category": "health-indemnity",
+      "line": "health",
+      "kind": "product",
+      "status": "active",
+      "analysis": "{\"state\": \"extracted\", \"analysed_at\": \"2026-10-16 04:48:12.477432+00\", \"note\": \"Every stated fact carries a verbatim policy para (field quote) found in the cited clause.\"}",
+      "url": "https://indiainsurances.com/policy/hdfc-ergo-general-insurance/my-optima-secure-hdfhlip26058v082526",
+      "api": null,
+      "summary": "my:Optima Secure is an HDFC ERGO indemnity health policy with eight plans, Base Sum Insured from 5 to 200 Lakhs depending on plan, and cover in India (worldwide in the two Global plans). Most plans pay room rent at actuals, pre- and post-hospitalisation for 60 and 180 days and restore 100% of the Base Sum Insured, while pre-existing diseases wait 36 months, listed illnesses 24 months and other illnesses 30 days.",
+      "fetched_at": "2026-11-14T20:25:32.074978+00:00",
+      "filter_values": {
+        "sum_insured_options": [
+          "5 to 200 Lakhs Base Sum Insured, depending on plan"
+        ],
+        "copay": [
+          "None stated; no co-payment for treatment in a higher-tier city"
+        ],
+        "deductible": [
+          "None unless opted (Global plans: Rs. 10,000 per claim outside India)"
+        ],
+        "initial_waiting": [
+          "30 days (accidents covered)"
+        ],
+        "ped_waiting": [
+          "36 months"
+        ]
+      }
+    }
+  ],
+  "total": 31,
+  "filter_options": {
+    "copay": [
+      "0% within your chosen hospital package; 10% or 25% outside it",
+      "10% or 20% if treated in a higher-cost zone than chosen (not for accidents); otherwise none unless opted",
+      "20% if you pay Zone B premium and are treated in a Zone A city; otherwise none unless opted",
+      "20% in Delhi NCR, Mumbai, Kolkata and Gujarat (Classic plan); none (Enhanced plan)",
+      "20% in Variant 2023 for a room above Shared Room",
+      "20% on every claim",
+      "5% on all claims",
+      "5% on every claim",
+      "No zone co-payment for treatment in a higher tier city",
+      "None",
+      "None as standard (10% or 20% may apply for late intimation)",
+      "None by default; 10% or 20% if treated in a costlier zone than the premium zone",
+      "None for Zone A premium; zone co-pay 15%, 20% or 5% when treated in a higher zone (not for accidents)",
+      "None in Zone 1; 20% in Mumbai, Delhi NCR, Kolkata & Gujarat State under Zone 2",
+      "None in your own zone; 10% or 20% if treated in a higher zone",
+      "None on hospital claims; 20% on optional dental; 80% paid abroad without pre-approval",
+      "None stated; no co-payment for treatment in a higher-tier city",
+      "None unless opted",
+      "None unless opted (voluntary 10%, 20% or 30%)",
+      "None unless the voluntary co-payment (5%, 10%, 15% or 20%) is opted",
+      "None, except 10% zone co-pay in some cases",
+      "None; 10% zone co-pay if treated in a higher zone without address proof"
+    ],
+    "deductible": [
+      "None",
+      "None (NA)",
+      "None unless opted",
+      "None unless opted (2500 to 50,000 per claim)",
+      "None unless opted (Global plans: Rs. 10,000 per claim outside India)",
+      "None unless opted (Rs 2,500 to 50,000)",
+      "None unless opted (Rs. 50,000 to 25 lakhs)",
+      "None unless opted (aggregate \u20b910K to \u20b910L, or \u20b91K to \u20b95K per day)"
+    ],
+    "initial_waiting": [
+      "180 or 120 days, as shown in the policy schedule",
+      "30 days",
+      "30 days (7 days in some plans)",
+      "30 days (accidents covered)",
+      "30 days (can be reduced to none, 2, 7 or 15 days as opted)",
+      "None"
+    ],
+    "ped_waiting": [
+      "12 months",
+      "24 months",
+      "3 years",
+      "36 months",
+      "36 months (24 months for pre-existing disability)",
+      "36 months (or the period opted, shown in the schedule)",
+      "36 months for Sum Insured up to Rs 5 Lacs; 24 months for Rs 7.5 Lacs and above",
+      "As opted: none, 3 months, 6 months, 1, 2 or 3 years",
+      "None"
+    ]
+  }
+}
