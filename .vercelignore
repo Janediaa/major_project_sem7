@@ -1,0 +1,15 @@
+.venv
+.venv/
+venv/
+venv313/
+node_modules/
+frontend/node_modules/
+.pytest_cache/
+.vscode/
+data/chroma_db/
+data/chroma_test/
+data/insurance_chroma_db/
+data/raw/
+*.pyc
+__pycache__/
+.git/
