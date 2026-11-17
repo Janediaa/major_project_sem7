@@ -1,5 +1,7 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
+import ProtectedRoute from './components/auth/ProtectedRoute.jsx';
 import AppLayout from './layouts/AppLayout.jsx';
+import Auth from './pages/Auth.jsx';
 import Dashboard from './pages/Dashboard.jsx';
 import DoctorHospital from './pages/DoctorHospital.jsx';
 import Insurance from './pages/Insurance.jsx';
@@ -10,7 +12,15 @@ import MedicalKnowledge from './pages/MedicalKnowledge.jsx';
 export default function App() {
   return (
     <Routes>
-      <Route element={<AppLayout />}>
+      <Route path="/login" element={<Auth />} />
+      <Route path="/register" element={<Auth />} />
+      <Route
+        element={
+          <ProtectedRoute>
+            <AppLayout />
+          </ProtectedRoute>
+        }
+      >
         <Route index element={<Dashboard />} />
         <Route path="doctor-hospital" element={<DoctorHospital />} />
         <Route path="insurance" element={<Insurance />} />
