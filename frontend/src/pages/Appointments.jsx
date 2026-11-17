@@ -144,8 +144,11 @@ export default function Appointments() {
       }
     }
     loadDirectory();
+    const handleDocUpdate = () => loadDirectory();
+    window.addEventListener('hn_doctors_updated', handleDocUpdate);
     return () => {
       active = false;
+      window.removeEventListener('hn_doctors_updated', handleDocUpdate);
     };
   }, [state]);
 
