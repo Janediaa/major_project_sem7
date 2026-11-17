@@ -292,6 +292,9 @@ export default function Appointments() {
 
   useEffect(() => {
     refreshAppointmentsList();
+    const handleSync = () => refreshAppointmentsList();
+    window.addEventListener('hn_appointments_updated', handleSync);
+    return () => window.removeEventListener('hn_appointments_updated', handleSync);
   }, [refreshAppointmentsList]);
 
   const handleCityChange = (nextCity) => {
@@ -346,6 +349,15 @@ export default function Appointments() {
       });
 
       const booked = res.appointment;
+      try {
+        const stored = JSON.parse(localStorage.getItem('hn_user_bookings') || '[]');
+        const updatedBookings = [booked, ...stored.filter((b) => b.booking_reference !== booked.booking_reference)];
+        localStorage.setItem('hn_user_bookings', JSON.stringify(updatedBookings));
+        window.dispatchEvent(new CustomEvent('hn_appointments_updated', { detail: booked }));
+      } catch (storageErr) {
+        console.warn('Failed to cache user booking:', storageErr);
+      }
+
       setToast(
         `Confirmed (${booked.booking_reference}): ${booked.doctor_name} on ${booked.appointment_date} at ${booked.display_time}.`
       );
@@ -367,6 +379,16 @@ export default function Appointments() {
   const handleCancel = async (appointmentId) => {
     try {
       await cancelAppointment(appointmentId);
+      try {
+        const stored = JSON.parse(localStorage.getItem('hn_user_bookings') || '[]');
+        const updatedBookings = stored.map((b) =>
+          b.appointment_id === appointmentId ? { ...b, status: 'cancelled' } : b
+        );
+        localStorage.setItem('hn_user_bookings', JSON.stringify(updatedBookings));
+        window.dispatchEvent(new CustomEvent('hn_appointments_updated', { detail: { appointmentId, status: 'cancelled' } }));
+      } catch (storageErr) {
+        console.warn('Failed to sync cancellation:', storageErr);
+      }
       setToast('Appointment cancelled and slot released.');
       await Promise.all([
         refreshAppointmentsList(),
