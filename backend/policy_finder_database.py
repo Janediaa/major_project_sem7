@@ -1,4 +1,6 @@
 
+import os
+import shutil
 import sqlite3
 import json
 import re
@@ -10,13 +12,27 @@ from datetime import datetime, timezone
 # Store the Policy Finder database separately
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = PROJECT_ROOT / "data"
-DATA_DIR.mkdir(parents=True, exist_ok=True)
+SOURCE_DB_PATH = DATA_DIR / "policy_finder.db"
+TMP_DB_PATH = Path("/tmp/policy_finder.db")
 
-DB_PATH = DATA_DIR / "policy_finder.db"
+
+def get_policy_finder_db_path() -> Path:
+    """Use /tmp/policy_finder.db on read-only serverless runtimes like Vercel."""
+    if os.environ.get("VERCEL"):
+        if not TMP_DB_PATH.exists() and SOURCE_DB_PATH.exists():
+            TMP_DB_PATH.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(SOURCE_DB_PATH, TMP_DB_PATH)
+        return TMP_DB_PATH
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
+    return SOURCE_DB_PATH
+
+
+DB_PATH = get_policy_finder_db_path()
 
 
 def get_connection():
-    connection = sqlite3.connect(DB_PATH)
+    db_path = get_policy_finder_db_path()
+    connection = sqlite3.connect(db_path)
     connection.row_factory = sqlite3.Row
     return connection
 
