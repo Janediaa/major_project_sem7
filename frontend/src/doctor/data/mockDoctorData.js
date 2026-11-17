@@ -45,6 +45,7 @@ export const DEMO_DOCTOR = {
 const ROWS = [
   [-3, '10:00 AM', 'Rahul Verma', 34, 'Male', 'Asthma follow-up', 'completed', 'Using inhaler twice a day. Wants to review the dose.'],
   [-3, '11:30 AM', 'Priya Sharma', 29, 'Female', 'Persistent cough', 'completed', 'Cough for about three weeks, worse at night.'],
+  [-7, '11:00 AM', 'Alex Sharma', 28, 'Female', 'Annual respiratory screening & spirometry review', 'completed', 'Routine outpatient pulmonary checkup. All vitals normal. Patient portal booking reference BK-AS-88104.'],
   [-2, '09:30 AM', 'Mohan Das', 61, 'Male', 'COPD review', 'completed', 'Routine six-month review.'],
   [-2, '02:00 PM', 'Neha Kapoor', 41, 'Female', 'Allergy-related wheezing', 'rejected', 'Wheezing in spring.', null, 'Outside my clinic days. Please book with the allergy clinic.'],
   [-1, '04:00 PM', 'Aditya Singh', 8, 'Male', 'Recurrent cough', 'completed', 'Parent attending. Cough after colds.'],
@@ -53,6 +54,7 @@ const ROWS = [
   [0, '03:30 PM', 'Farah Khan', 46, 'Female', 'Shortness of breath on exertion', 'confirmed', 'Notices it when climbing stairs.'],
   [0, '05:00 PM', 'Vivek Joshi', 58, 'Male', 'Post-TB follow-up', 'pending', 'Finished treatment last month.', '2 hours ago'],
   [1, '10:00 AM', 'Isha Bansal', 23, 'Female', 'Inhaler technique check', 'confirmed', 'New to inhalers.'],
+  [1, '10:30 AM', 'Alex Sharma', 28, 'Female', 'Persistent dry cough and mild breathlessness', 'pending', 'Experiencing dry cough for two weeks, worse at night. Patient portal booking reference BK-AS-94021.', '15 minutes ago'],
   [1, '10:00 AM', 'Dev Patel', 67, 'Male', 'Chest tightness evaluation', 'pending', 'Tightness in the morning for two weeks.', '5 hours ago'],
   [1, '04:00 PM', 'Anjali Mehra', 31, 'Female', 'Asthma follow-up', 'pending', 'Needs a refill and a review.', '1 day ago'],
   [2, '09:30 AM', 'Rajiv Nair', 49, 'Male', 'Persistent cough', 'confirmed', 'Smoker, wants to quit.'],
