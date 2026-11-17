@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
+import { saveCustomDoctor } from '../services/healthcareService';
 
 const AuthContext = createContext(null);
 
@@ -128,6 +129,9 @@ export function AuthProvider({ children }) {
     role = ROLES.PATIENT,
     phone = '',
     specialization = '',
+    hospital = '',
+    city = '',
+    fee = 750,
     age = '',
     sex = '',
   }) => {
@@ -148,12 +152,15 @@ export function AuthProvider({ children }) {
       role,
       phone: phone.trim(),
       specialization: specialization.trim(),
+      hospital: hospital.trim() || 'Care Plus Multi Specialty Clinic',
+      city: city.trim() || 'Delhi',
+      fee: fee ? Number(fee) : 750,
       age: age ? String(age).trim() : '',
       sex: sex.trim(),
-      avatar: name.trim().slice(0, 2).toUpperCase(),
+      avatar: name.trim().replace(/^Dr\.?\s*/i, '').slice(0, 2).toUpperCase(),
       headline:
         role === ROLES.DOCTOR
-          ? `Dr. ${name.trim()} (${specialization || 'General'})`
+          ? `Dr. ${name.trim().replace(/^Dr\.?\s*/i, '')} (${specialization || 'General'})`
           : `${role.charAt(0).toUpperCase() + role.slice(1)} Account`,
       bio: '',
     };
@@ -161,6 +168,43 @@ export function AuthProvider({ children }) {
     // Save into registered users collection
     registeredUsers.push(newUser);
     localStorage.setItem('hn_registered_users', JSON.stringify(registeredUsers));
+
+    // If new user is a doctor, save to verified doctor directory immediately
+    if (role === ROLES.DOCTOR) {
+      saveCustomDoctor({
+        doctor_id: `doc-${cleanEmail.replace(/[@.]/g, '_')}`,
+        doctor_name: name.trim().startsWith('Dr.') ? name.trim() : `Dr. ${name.trim()}`,
+        doctor_type: specialization.trim() || 'General Medicine',
+        specialization: specialization.trim() || 'General Medicine',
+        hospital_name: hospital.trim() || 'Care Plus Multi Specialty Clinic',
+        city: city.trim() || 'Delhi',
+        fees: fee ? Number(fee) : 750,
+        phone: phone.trim() || '+91 98765 43210',
+        email: cleanEmail,
+      });
+    } else {
+      // If patient, save to patient registry
+      try {
+        const rawP = localStorage.getItem('hn_patient_registry');
+        const pList = rawP ? JSON.parse(rawP) : [];
+        const filtered = pList.filter((p) => p.email !== cleanEmail);
+        const pEntry = {
+          id: newUser.id,
+          name: newUser.name,
+          email: cleanEmail,
+          phone: newUser.phone,
+          age: newUser.age,
+          sex: newUser.sex,
+          registered_at: new Date().toISOString(),
+        };
+        localStorage.setItem('hn_patient_registry', JSON.stringify([pEntry, ...filtered]));
+        if (typeof window !== 'undefined') {
+          window.dispatchEvent(new CustomEvent('hn_patients_updated', { detail: pEntry }));
+        }
+      } catch (pErr) {
+        console.warn('Failed to store patient in registry:', pErr);
+      }
+    }
 
     // Save session (without password in active session state)
     const { password: _, ...safeUser } = newUser;
