@@ -8,7 +8,6 @@ import {
   Lock,
   Mail,
   Phone,
-  ShieldCheck,
   Sparkles,
   Stethoscope,
   User,
@@ -42,9 +41,14 @@ export default function Auth() {
 
   const destination = location.state?.from?.pathname || '/';
 
+  const getDestination = (roleKey) => {
+    if (destination && destination !== '/') return destination;
+    return roleKey === ROLES.DOCTOR ? '/doctor' : '/';
+  };
+
   const handleDemoSelect = (roleKey) => {
     loginAsDemo(roleKey);
-    navigate(destination, { replace: true });
+    navigate(getDestination(roleKey), { replace: true });
   };
 
   const handleLoginSubmit = async (e) => {
@@ -58,8 +62,8 @@ export default function Auth() {
 
     setSubmitting(true);
     try {
-      await login(email, password, selectedRole);
-      navigate(destination, { replace: true });
+      const res = await login(email, password, selectedRole);
+      navigate(getDestination(res.user?.role || selectedRole), { replace: true });
     } catch (err) {
       setError(err.message || 'Unable to sign in. Please verify your details.');
     } finally {
@@ -86,7 +90,7 @@ export default function Auth() {
 
     setSubmitting(true);
     try {
-      await register({
+      const res = await register({
         name,
         email,
         password,
@@ -96,7 +100,7 @@ export default function Auth() {
         age: selectedRole === ROLES.PATIENT ? age : '',
         sex: selectedRole === ROLES.PATIENT ? sex : '',
       });
-      navigate(destination, { replace: true });
+      navigate(getDestination(res.user?.role || selectedRole), { replace: true });
     } catch (err) {
       setError(err.message || 'Registration failed. Please try again.');
     } finally {
@@ -146,26 +150,13 @@ export default function Auth() {
               type="button"
               className="auth-demo-btn auth-demo-btn--doctor"
               onClick={() => handleDemoSelect(ROLES.DOCTOR)}
-              title="Sign in as Dr. Sarah Jenkins (Cardiologist)"
+              title="Sign in as Dr. Ananya Rao (Pulmonologist)"
             >
               <div className="auth-demo-btn__icon">
                 <Stethoscope size={16} />
               </div>
               <strong>Doctor</strong>
-              <span>Dr. Jenkins</span>
-            </button>
-
-            <button
-              type="button"
-              className="auth-demo-btn auth-demo-btn--admin"
-              onClick={() => handleDemoSelect(ROLES.ADMIN)}
-              title="Sign in as Hospital Administrator"
-            >
-              <div className="auth-demo-btn__icon">
-                <ShieldCheck size={16} />
-              </div>
-              <strong>Admin</strong>
-              <span>Hospital Lead</span>
+              <span>Dr. Ananya Rao</span>
             </button>
           </div>
         </section>
@@ -271,16 +262,6 @@ export default function Auth() {
                   <strong>Doctor</strong>
                   <small>Care provider</small>
                 </button>
-
-                <button
-                  type="button"
-                  className={`auth-role-card ${selectedRole === ROLES.ADMIN ? 'auth-role-card--active' : ''}`}
-                  onClick={() => setSelectedRole(ROLES.ADMIN)}
-                >
-                  <ShieldCheck size={16} />
-                  <strong>Admin</strong>
-                  <small>System manager</small>
-                </button>
               </div>
             </div>
 
@@ -383,16 +364,6 @@ export default function Auth() {
                   <Stethoscope size={16} />
                   <strong>Doctor</strong>
                   <small>Manage clinic</small>
-                </button>
-
-                <button
-                  type="button"
-                  className={`auth-role-card ${selectedRole === ROLES.ADMIN ? 'auth-role-card--active' : ''}`}
-                  onClick={() => setSelectedRole(ROLES.ADMIN)}
-                >
-                  <ShieldCheck size={16} />
-                  <strong>Admin</strong>
-                  <small>Full control</small>
                 </button>
               </div>
             </div>
