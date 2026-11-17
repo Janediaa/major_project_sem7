@@ -10,6 +10,7 @@ import {
   MapPin,
   Search,
   SearchX,
+  UserPlus,
   UserRound,
   BriefcaseMedical,
   X,
@@ -17,7 +18,7 @@ import {
 
 import PageHeader from '../components/common/PageHeader';
 import { useAuth } from '../context/AuthContext';
-import { getDoctors, getHospitals } from '../services/healthcareService';
+import { getDoctors, getHospitals, saveCustomDoctor } from '../services/healthcareService';
 import {
   clearAllSearchHistory,
   loadSearchHistory,
@@ -64,7 +65,18 @@ export default function DoctorHospital() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  // Fetch actual doctors and hospitals from FastAPI
+  // Add doctor modal state
+  const [showAddModal, setShowAddModal] = useState(false);
+  const [addDocName, setAddDocName] = useState('');
+  const [addDocSpec, setAddDocSpec] = useState('General Medicine');
+  const [addDocHosp, setAddDocHosp] = useState('Apollo Hospital');
+  const [addDocCity, setAddDocCity] = useState('Delhi');
+  const [addDocFee, setAddDocFee] = useState('800');
+  const [addDocPhone, setAddDocPhone] = useState('+91 98765 43210');
+  const [addDocSubmitting, setAddDocSubmitting] = useState(false);
+  const [addDocSuccess, setAddDocSuccess] = useState('');
+
+  // Fetch actual doctors and hospitals from FastAPI & persistent registry
   useEffect(() => {
     let active = true;
 
@@ -95,8 +107,14 @@ export default function DoctorHospital() {
 
     loadHealthcareData();
 
+    const handleUpdate = () => {
+      loadHealthcareData();
+    };
+    window.addEventListener('hn_doctors_updated', handleUpdate);
+
     return () => {
       active = false;
+      window.removeEventListener('hn_doctors_updated', handleUpdate);
     };
   }, []);
 
@@ -187,6 +205,15 @@ export default function DoctorHospital() {
       <PageHeader
         title="Doctor & Hospital"
         description="Search doctors and hospitals using our healthcare database."
+        actions={
+          <button
+            type="button"
+            className="btn btn--primary"
+            onClick={() => setShowAddModal(true)}
+          >
+            <UserPlus size={16} /> Add Doctor
+          </button>
+        }
       />
 
       <section className="panel search-panel" aria-label="Search">
@@ -475,6 +502,132 @@ export default function DoctorHospital() {
             ))}
           </div>
         </section>
+      )}
+
+      {showAddModal && (
+        <div className="dr-overlay" role="dialog" aria-modal="true">
+          <div className="dr-modal dr-modal--wide">
+            <div className="dr-modal__head">
+              <h2>Add Verified Clinician to Directory</h2>
+              <button
+                type="button"
+                className="icon-btn"
+                onClick={() => setShowAddModal(false)}
+                aria-label="Close"
+              >
+                <X size={18} />
+              </button>
+            </div>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                if (!addDocName.trim()) return;
+                setAddDocSubmitting(true);
+                const saved = saveCustomDoctor({
+                  name: addDocName.trim(),
+                  specialization: addDocSpec.trim(),
+                  hospital: addDocHosp.trim(),
+                  city: addDocCity.trim(),
+                  fees: Number(addDocFee) || 750,
+                  phone: addDocPhone.trim(),
+                });
+                setAddDocSubmitting(false);
+                setAddDocSuccess(`Dr. ${saved.doctor_name} added to directory!`);
+                setTimeout(() => {
+                  setAddDocSuccess('');
+                  setShowAddModal(false);
+                  setAddDocName('');
+                }, 1200);
+              }}
+            >
+              <div className="dr-modal__body">
+                {addDocSuccess && (
+                  <p style={{ color: '#047857', fontWeight: 600, padding: '0.5rem', background: '#ecfdf5', borderRadius: 'var(--r-md)' }}>
+                    ✓ {addDocSuccess}
+                  </p>
+                )}
+                <div className="dr-form-grid">
+                  <label className="stack">
+                    <span className="label">Doctor Full Name</span>
+                    <input
+                      className="field"
+                      required
+                      placeholder="e.g. Dr. Rajesh Verma"
+                      value={addDocName}
+                      onChange={(e) => setAddDocName(e.target.value)}
+                    />
+                  </label>
+                  <label className="stack">
+                    <span className="label">Specialization</span>
+                    <input
+                      className="field"
+                      required
+                      placeholder="e.g. Cardiology"
+                      value={addDocSpec}
+                      onChange={(e) => setAddDocSpec(e.target.value)}
+                    />
+                  </label>
+                  <label className="stack">
+                    <span className="label">Hospital / Clinic</span>
+                    <input
+                      className="field"
+                      required
+                      placeholder="e.g. Apollo Hospital"
+                      value={addDocHosp}
+                      onChange={(e) => setAddDocHosp(e.target.value)}
+                    />
+                  </label>
+                  <label className="stack">
+                    <span className="label">City</span>
+                    <input
+                      className="field"
+                      required
+                      placeholder="e.g. Mumbai, Delhi, Bangalore"
+                      value={addDocCity}
+                      onChange={(e) => setAddDocCity(e.target.value)}
+                    />
+                  </label>
+                  <label className="stack">
+                    <span className="label">Consultation Fee (₹)</span>
+                    <input
+                      className="field"
+                      type="number"
+                      required
+                      placeholder="e.g. 900"
+                      value={addDocFee}
+                      onChange={(e) => setAddDocFee(e.target.value)}
+                    />
+                  </label>
+                  <label className="stack">
+                    <span className="label">Clinic Phone</span>
+                    <input
+                      className="field"
+                      placeholder="+91 98765 43210"
+                      value={addDocPhone}
+                      onChange={(e) => setAddDocPhone(e.target.value)}
+                    />
+                  </label>
+                </div>
+              </div>
+              <div className="dr-modal__foot">
+                <button
+                  type="button"
+                  className="btn btn--ghost"
+                  onClick={() => setShowAddModal(false)}
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="btn btn--primary"
+                  disabled={addDocSubmitting}
+                >
+                  {addDocSubmitting ? 'Saving...' : 'Add to Directory'}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
       )}
 
     </div>
