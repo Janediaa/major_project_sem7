@@ -8,11 +8,14 @@ import {
   Clock,
   IndianRupee,
   RefreshCw,
+  ShieldCheck,
   Stethoscope,
+  User,
   X,
 } from 'lucide-react';
 import PageHeader from '../components/common/PageHeader';
 import Notice from '../components/common/Notice';
+import { ROLES, useAuth } from '../context/AuthContext';
 import { getDoctors, getHospitals } from '../services/healthcareService';
 import {
   bookAppointment,
@@ -30,6 +33,7 @@ const formatTitle = (value = '') =>
 
 export default function Appointments() {
   const { state } = useLocation();
+  const { user, role } = useAuth();
 
   const [doctorsData, setDoctorsData] = useState([]);
   const [hospitalsData, setHospitalsData] = useState([]);
@@ -371,6 +375,16 @@ export default function Appointments() {
     }
   };
 
+  // Pre-fill patient details for authenticated users
+  useEffect(() => {
+    if (user && role === ROLES.PATIENT) {
+      if (user.name && !patientName) setPatientName(user.name);
+      if (user.phone && !patientPhone) setPatientPhone(user.phone);
+      if (user.age && !patientAge) setPatientAge(String(user.age));
+      if (user.sex && !patientSex) setPatientSex(user.sex);
+    }
+  }, [user, role]);
+
   const opdDaysLabel = scheduleInfo.map((s) => s.day_name.slice(0, 3)).join(', ');
   const avgWait = scheduleInfo[0]?.avg_waiting_minutes;
   const opdWindow = scheduleInfo[0]
@@ -383,6 +397,54 @@ export default function Appointments() {
         title="Appointments"
         description="Book real OPD slots merged from the Medscheduler outpatient calendar with our verified Indian doctors database."
       />
+
+      {/* Role-Based Session Banner */}
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
+          gap: '0.75rem',
+          padding: '0.85rem 1.25rem',
+          borderRadius: 'var(--r-md)',
+          background:
+            role === ROLES.DOCTOR
+              ? '#ecfdf5'
+              : role === ROLES.ADMIN
+              ? '#fef3c7'
+              : '#eef2ff',
+          border: `1px solid ${
+            role === ROLES.DOCTOR
+              ? '#a7f3d0'
+              : role === ROLES.ADMIN
+              ? '#fde68a'
+              : '#c7d2fe'
+          }`,
+          marginBottom: '1.25rem',
+        }}
+      >
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+          {role === ROLES.DOCTOR ? (
+            <Stethoscope size={18} style={{ color: '#047857' }} />
+          ) : role === ROLES.ADMIN ? (
+            <ShieldCheck size={18} style={{ color: '#b45309' }} />
+          ) : (
+            <User size={18} style={{ color: '#4338ca' }} />
+          )}
+          <span style={{ fontSize: '0.875rem', color: 'var(--navy-900)' }}>
+            Signed in as <strong>{user?.name}</strong> (
+            <span style={{ textTransform: 'capitalize', fontWeight: 600 }}>{role}</span>
+            )
+            {role === ROLES.PATIENT && ' — Patient profile details are auto-filled for faster booking'}
+            {role === ROLES.DOCTOR && ' — Reviewing outpatient consultations & OPD slots'}
+            {role === ROLES.ADMIN && ' — Full administrative oversight across all doctor bookings'}
+          </span>
+        </div>
+        <span className={`role-badge role-badge--${role || 'patient'}`}>
+          {role} portal
+        </span>
+      </div>
 
       {initError && (
         <Notice tone="warning" title="Backend connection issue">
