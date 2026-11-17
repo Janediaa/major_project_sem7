@@ -3,7 +3,11 @@
 from fastapi import APIRouter, HTTPException, Query
 
 from backend.database import get_db_connection
-from backend.schemas import AppointmentCreateRequest, AppointmentRescheduleRequest
+from backend.schemas import (
+    AppointmentCreateRequest,
+    AppointmentRescheduleRequest,
+    AppointmentStatusUpdateRequest,
+)
 from src.services.appointment_service import (
     AppointmentConflictError,
     AppointmentNotFoundError,
@@ -184,5 +188,43 @@ def reschedule_existing_appointment(
         raise HTTPException(status_code=409, detail=str(exc)) from exc
     except ValueError as exc:
         raise HTTPException(status_code=422, detail=str(exc)) from exc
+    finally:
+        conn.close()
+
+
+@router.patch("/appointments/{appointment_id}/status")
+def update_existing_appointment_status(
+    appointment_id: int,
+    payload: AppointmentStatusUpdateRequest,
+):
+    conn = get_db_connection()
+    try:
+        norm_status = payload.status.strip().lower()
+        db_status = norm_status
+        if norm_status in ("rejected", "cancelled"):
+            db_status = "cancelled"
+        elif norm_status in ("completed", "attended"):
+            db_status = "attended"
+        elif norm_status in ("confirmed", "scheduled"):
+            db_status = "scheduled"
+
+        cursor = conn.execute(
+            "SELECT appointment_id FROM appointments WHERE appointment_id = ?",
+            (appointment_id,),
+        )
+        if not cursor.fetchone():
+            raise HTTPException(status_code=404, detail=f"Appointment {appointment_id} not found.")
+
+        with conn:
+            conn.execute(
+                "UPDATE appointments SET status = ? WHERE appointment_id = ?",
+                (db_status, appointment_id),
+            )
+
+        updated = get_appointment_by_id(conn, appointment_id)
+        return {
+            "message": f"Appointment status updated to {payload.status}.",
+            "appointment": updated,
+        }
     finally:
         conn.close()

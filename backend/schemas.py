@@ -46,3 +46,10 @@ class AppointmentRescheduleRequest(BaseModel):
 
     appointment_date: str = Field(..., min_length=10, max_length=10, description="YYYY-MM-DD")
     appointment_time: str = Field(..., min_length=4, max_length=12, description="HH:MM or HH:MM AM/PM")
+
+
+class AppointmentStatusUpdateRequest(BaseModel):
+    """Request body for updating appointment status."""
+
+    status: str = Field(..., min_length=1, max_length=30)
+    reason: str | None = Field(default=None, max_length=500)
