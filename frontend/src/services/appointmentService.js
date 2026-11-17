@@ -428,14 +428,22 @@ export async function getDoctorAvailability(doctorId, { startDate, days = 7 } = 
     const d = addDays(i, base);
     const dateStr = toISO(d);
     const dayOfWeek = d.getDay(); // 0 is Sunday
-    const dayName = d.toLocaleDateString('en-US', { weekday: 'short' });
+    const weekdayShort = d.toLocaleDateString('en-US', { weekday: 'short' });
+    const fullDayName = d.toLocaleDateString('en-US', { weekday: 'long' });
+    const dayNum = d.getDate();
+    const monthShort = d.toLocaleDateString('en-US', { month: 'short' });
     const isWorking = dayOfWeek !== 0; // Mon-Sat working
     return {
       date: dateStr,
-      day_name: dayName,
-      long_label: `${dayName}, ${d.toLocaleDateString('en-IN', { month: 'short', day: 'numeric' })}`,
+      day_of_week: dayOfWeek,
+      day_name: fullDayName,
+      weekday_short: weekdayShort,
+      day_num: dayNum,
+      month_short: monthShort,
+      long_label: `${fullDayName}, ${dayNum} ${monthShort} ${d.getFullYear()}`,
       opd_open: isWorking,
       available_count: isWorking ? 8 : 0,
+      total_count: 10,
       total_slots: 10,
     };
   });
@@ -467,7 +475,11 @@ export async function getDoctorSlots(doctorId, date) {
       `${API_BASE_URL}/api/doctors/${doctorId}/slots?${params.toString()}`
     );
     if (res && Array.isArray(res.slots) && res.slots.length > 0) {
-      return res;
+      return {
+        ...res,
+        opd_open: res.opd_open !== false,
+        total_count: res.total_count || res.total_slots || res.slots.length,
+      };
     }
   } catch {
     // Fallback
@@ -493,6 +505,7 @@ export async function getDoctorSlots(doctorId, date) {
       time,
       display_time: time,
       available: !isBooked,
+      status: isBooked ? 'booked' : 'available',
     };
   });
 
@@ -501,6 +514,8 @@ export async function getDoctorSlots(doctorId, date) {
   return {
     date,
     doctor_id: doctorId,
+    opd_open: true,
+    total_count: slots.length,
     total_slots: slots.length,
     available_count: availableCount,
     booked_count: slots.length - availableCount,
