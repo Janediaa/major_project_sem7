@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Activity, ArrowRight, CalendarCheck2, CheckCheck, Clock3, ListChecks, Inbox } from 'lucide-react';
+import { Activity, ArrowRight, CalendarCheck2, CheckCheck, Clock3, ListChecks, Inbox, Users } from 'lucide-react';
 import PageHeader from '../../components/common/PageHeader';
 import StatCard from '../components/StatCard';
 import StatusBadge from '../components/StatusBadge';
@@ -33,7 +33,12 @@ export default function DoctorDashboard() {
             <Activity size={12} /> Live OPD Console
           </span>
         }
-        actions={<Link to="/doctor/requests" className="btn btn--primary"><Inbox size={17} /> Review requests</Link>}
+        actions={
+          <div className="row" style={{ gap: '0.5rem' }}>
+            <Link to="/doctor/patients" className="btn btn--ghost"><Users size={16} /> Patients</Link>
+            <Link to="/doctor/requests" className="btn btn--primary"><Inbox size={16} /> Review requests</Link>
+          </div>
+        }
       />
 
       <dl className="dr-stats">

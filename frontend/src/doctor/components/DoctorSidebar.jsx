@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from 'react-router-dom';
-import { ArrowLeftRight, CalendarCheck2, CalendarClock, Inbox, LayoutDashboard, LogOut, UserRound, X } from 'lucide-react';
+import { ArrowLeftRight, CalendarCheck2, CalendarClock, Inbox, LayoutDashboard, LogOut, UserRound, Users, X } from 'lucide-react';
 import Logo from '../../components/layout/Logo';
 import { useDoctor } from '../DoctorContext';
 
@@ -7,6 +7,7 @@ const LINKS = [
   { to: '/doctor', label: 'Dashboard', icon: LayoutDashboard, end: true },
   { to: '/doctor/appointments', label: 'My Appointments', icon: CalendarCheck2 },
   { to: '/doctor/requests', label: 'Appointment Requests', icon: Inbox, badge: true },
+  { to: '/doctor/patients', label: 'Patients', icon: Users },
   { to: '/doctor/availability', label: 'My Availability', icon: CalendarClock },
   { to: '/doctor/profile', label: 'My Profile', icon: UserRound },
 ];

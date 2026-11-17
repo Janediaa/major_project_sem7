@@ -7,6 +7,7 @@ const TITLES = {
   '/doctor': 'Dashboard',
   '/doctor/appointments': 'My Appointments',
   '/doctor/requests': 'Appointment Requests',
+  '/doctor/patients': 'Patients Directory',
   '/doctor/availability': 'My Availability',
   '/doctor/profile': 'My Profile',
 };

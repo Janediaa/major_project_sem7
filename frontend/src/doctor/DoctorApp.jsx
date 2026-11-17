@@ -5,6 +5,7 @@ import DoctorLogin from './pages/DoctorLogin';
 import DoctorDashboard from './pages/DoctorDashboard';
 import MyAppointments from './pages/MyAppointments';
 import AppointmentRequests from './pages/AppointmentRequests';
+import MyPatients from './pages/MyPatients';
 import MyAvailability from './pages/MyAvailability';
 import MyProfile from './pages/MyProfile';
 // Load the shared patient-app styles first so doctor.css always comes after them
@@ -36,6 +37,7 @@ export default function DoctorApp() {
           <Route index element={<DoctorDashboard />} />
           <Route path="appointments" element={<MyAppointments />} />
           <Route path="requests" element={<AppointmentRequests />} />
+          <Route path="patients" element={<MyPatients />} />
           <Route path="availability" element={<MyAvailability />} />
           <Route path="profile" element={<MyProfile />} />
         </Route>
