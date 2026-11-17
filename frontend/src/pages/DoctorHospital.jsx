@@ -4,16 +4,26 @@ import { useNavigate } from 'react-router-dom';
 import {
   Building2,
   CalendarPlus,
+  Clock,
+  History,
   IndianRupee,
   MapPin,
   Search,
   SearchX,
   UserRound,
-  BriefcaseMedical
+  BriefcaseMedical,
+  X,
 } from 'lucide-react';
 
 import PageHeader from '../components/common/PageHeader';
+import { useAuth } from '../context/AuthContext';
 import { getDoctors, getHospitals } from '../services/healthcareService';
+import {
+  clearAllSearchHistory,
+  loadSearchHistory,
+  removeSearchItem,
+  saveSearchItem,
+} from '../utils/searchHistory';
 
 const initials = (name = '') =>
   name
@@ -29,11 +39,24 @@ const has = (text, q) =>
 
 export default function DoctorHospital() {
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   const [query, setQuery] = useState('');
   const [location, setLocation] = useState('');
   const [specialty, setSpecialty] = useState('All');
   const [tab, setTab] = useState('all');
+  const [recentHistory, setRecentHistory] = useState([]);
+
+  useEffect(() => {
+    setRecentHistory(loadSearchHistory(user?.id));
+  }, [user?.id]);
+
+  const handleSearchKeyDown = (e) => {
+    if (e.key === 'Enter' && query.trim()) {
+      const updated = saveSearchItem(user?.id, query.trim(), '/doctor-hospital');
+      if (updated) setRecentHistory(updated);
+    }
+  };
 
   const [doctorsData, setDoctorsData] = useState([]);
   const [hospitalsData, setHospitalsData] = useState([]);
@@ -174,6 +197,7 @@ export default function DoctorHospital() {
             <input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
+              onKeyDown={handleSearchKeyDown}
               placeholder="Doctor or hospital name"
               aria-label="Search doctors and hospitals"
             />
@@ -184,11 +208,52 @@ export default function DoctorHospital() {
             <input
               value={location}
               onChange={(e) => setLocation(e.target.value)}
+              onKeyDown={handleSearchKeyDown}
               placeholder="City, e.g. Delhi"
               aria-label="Location"
             />
           </label>
         </div>
+
+        {recentHistory.length > 0 && (
+          <div className="search-history-chips">
+            <span className="search-history-chips__label">
+              <History size={13} /> Recent Searches:
+            </span>
+            {recentHistory.slice(0, 5).map((item) => (
+              <button
+                key={item.id}
+                type="button"
+                className="search-history-chip"
+                onClick={() => setQuery(item.query)}
+              >
+                <Clock size={11} style={{ opacity: 0.7 }} />
+                <span>{item.query}</span>
+                <span
+                  className="search-history-chip__del"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    const updated = removeSearchItem(user?.id, item.query);
+                    setRecentHistory(updated);
+                  }}
+                  title="Remove from history"
+                >
+                  <X size={11} />
+                </span>
+              </button>
+            ))}
+            <button
+              type="button"
+              className="search-history-chips__clear"
+              onClick={() => {
+                const updated = clearAllSearchHistory(user?.id);
+                setRecentHistory(updated);
+              }}
+            >
+              Clear
+            </button>
+          </div>
+        )}
 
         <div className="chip-row" role="group" aria-label="Specialty">
           {['All', ...specialties].map((s) => (
