@@ -9,7 +9,6 @@ import {
   LogOut,
   Menu,
   Search,
-  ShieldCheck,
   Sparkles,
   Stethoscope,
   User,
@@ -315,6 +314,7 @@ export default function Topbar({ onMenu }) {
                   onClick={() => {
                     loginAsDemo(ROLES.PATIENT);
                     setProfileOpen(false);
+                    navigate('/');
                   }}
                 >
                   <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
@@ -329,26 +329,13 @@ export default function Topbar({ onMenu }) {
                   onClick={() => {
                     loginAsDemo(ROLES.DOCTOR);
                     setProfileOpen(false);
+                    navigate('/doctor');
                   }}
                 >
                   <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                    <Stethoscope size={14} /> Doctor (Dr. Jenkins)
+                    <Stethoscope size={14} /> Doctor (Dr. Ananya Rao)
                   </span>
                   {role === ROLES.DOCTOR && <span style={{ fontSize: '0.7rem', color: 'var(--teal-600)' }}>Active</span>}
-                </button>
-
-                <button
-                  type="button"
-                  className={`profile-menu__switch-btn ${role === ROLES.ADMIN ? 'profile-menu__switch-btn--active' : ''}`}
-                  onClick={() => {
-                    loginAsDemo(ROLES.ADMIN);
-                    setProfileOpen(false);
-                  }}
-                >
-                  <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                    <ShieldCheck size={14} /> Admin (Hospital Lead)
-                  </span>
-                  {role === ROLES.ADMIN && <span style={{ fontSize: '0.7rem', color: 'var(--teal-600)' }}>Active</span>}
                 </button>
               </div>
 
