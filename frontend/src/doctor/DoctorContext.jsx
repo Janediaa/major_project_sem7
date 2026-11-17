@@ -21,6 +21,10 @@ export function DoctorProvider({ children }) {
     if (auth?.user && auth.user.role === ROLES.DOCTOR) {
       return { email: auth.user.email, name: auth.user.name };
     }
+    try {
+      const saved = localStorage.getItem('doctor-portal-demo-email');
+      if (saved) return { email: saved, name: 'Dr. Ananya Rao' };
+    } catch {}
     return null;
   });
 
@@ -99,6 +103,9 @@ export function DoctorProvider({ children }) {
 
   const logout = () => {
     setSession(null);
+    try {
+      localStorage.removeItem('doctor-portal-demo-email');
+    } catch {}
     if (auth?.logout) {
       auth.logout();
     }
